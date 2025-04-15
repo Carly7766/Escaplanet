@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 254716070}
   - component: {fileID: 254716069}
   - component: {fileID: 254716071}
+  - component: {fileID: 254716072}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -283,6 +284,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fcb002d9d684e18aa79575e62e421a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &254716072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254716066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b47d1bbdf2e4bbe85cd214b9d35560f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planetTransform: {fileID: 822161795}
+  rotationMethod: 0
+  rotateSpeed: 5
+  moveSpeed: 5
+  acceleration: 50
+  movementLerpAmount: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
