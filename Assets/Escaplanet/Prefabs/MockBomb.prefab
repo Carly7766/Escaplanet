@@ -290,7 +290,7 @@ MonoBehaviour:
   blinkInterval: 0.15
   explodeTime: 2
   explodeRadius: 3
-  explodeForce: 150
+  explodeForce: 50
   explodeLayerMask:
     serializedVersion: 2
     m_Bits: 1
