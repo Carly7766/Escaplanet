@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Escaplanet.Scripts.Test
@@ -31,6 +32,8 @@ namespace Escaplanet.Scripts.Test
         [SerializeField] private float acceleration = 50f;
         [SerializeField] private float movementLerpAmount = 1.0f;
 
+        private bool _isFlyingAway;
+
         private Transform _transform;
         private Rigidbody2D _rigidbody2D;
         private Vector2 _inputAxis;
@@ -55,8 +58,21 @@ namespace Escaplanet.Scripts.Test
             Rotate();
         }
 
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Planet"))
+            {
+                _isFlyingAway = false;
+            }
+        }
+
         private void Move()
         {
+            if (_isFlyingAway)
+            {
+                return;
+            }
+
             var diff = _transform.position - planetTransform.position;
 
             var zDir = new Vector3(planetTransform.position.x, planetTransform.position.y, -1.0f);
@@ -65,6 +81,12 @@ namespace Escaplanet.Scripts.Test
 
             var perpendicularSpeed = Vector2.Dot(_rigidbody2D.velocity, perpendicularNormalized);
 
+            if (Mathf.Abs(perpendicularSpeed) > moveSpeed)
+            {
+                _isFlyingAway = true;
+                return;
+            }
+
             var targetSpeed = _inputAxis.x * moveSpeed;
             targetSpeed = Mathf.Lerp(perpendicularSpeed, targetSpeed, movementLerpAmount);
 
@@ -72,6 +94,7 @@ namespace Escaplanet.Scripts.Test
 
             var speedDif = targetSpeed - perpendicularSpeed;
             var movement = speedDif * accelRate;
+
 
             _rigidbody2D.AddForce(perpendicularNormalized * movement, ForceMode2D.Force);
         }
