@@ -1,26 +1,23 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using R3;
-using R3.Triggers;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Escaplanet.Scripts.Test.Mock
+namespace Escaplanet.Test.Mock
 {
     public class MockBombGimmick : MonoBehaviour
     {
         [SerializeField] private float blinkInterval = 0.1f;
         [SerializeField] private float explodeTime = 3f;
         [SerializeField] private float explodeRadius;
-        [SerializeField] private float explodeForce = 10f;
+        [SerializeField] private float explodeForce = 5f;
         [SerializeField] private LayerMask explodeLayerMask;
+        private readonly Color _bombBlinkColor = new(1f, 0.5f, 0.5f);
 
         private readonly Color _bombColor = Color.gray;
-        private readonly Color _bombBlinkColor = new Color(1f, 0.5f, 0.5f);
+        private SpriteRenderer _explodeSpriteRenderer;
 
         private SpriteRenderer _spriteRenderer;
-        private SpriteRenderer _explodeSpriteRenderer;
 
         private void Awake()
         {
@@ -45,20 +42,27 @@ namespace Escaplanet.Scripts.Test.Mock
 
             Blink(blinkCancellationToken).Forget();
 
-            await UniTask.WaitForSeconds(explodeTime, cancellationToken: cancellationToken);
-            blinkCancellationTokenSource.Cancel();
-
-            _explodeSpriteRenderer.enabled = true;
-            var targetColliders =
-                Physics2D.OverlapCircleAll(transform.position, transform.localScale.x * explodeRadius / 2,
-                    explodeLayerMask);
-            foreach (var targetCollider in targetColliders)
+            try
             {
-                ApplyExplosionForce(targetCollider);
-            }
+                await UniTask.WaitForSeconds(explodeTime, cancellationToken: cancellationToken);
+                blinkCancellationTokenSource.Cancel();
 
-            await UniTask.WaitForSeconds(0.5f, cancellationToken: cancellationToken);
-            Destroy(gameObject);
+                _explodeSpriteRenderer.enabled = true;
+                var targetColliders = Physics2D.OverlapCircleAll(transform.position,
+                    transform.localScale.x * explodeRadius / 2, explodeLayerMask);
+                foreach (var targetCollider in targetColliders) ApplyExplosionForce(targetCollider);
+
+                await UniTask.WaitForSeconds(0.5f, cancellationToken: cancellationToken);
+                Destroy(gameObject);
+            }
+            catch (OperationCanceledException)
+            {
+                blinkCancellationTokenSource.Cancel();
+            }
+            finally
+            {
+                blinkCancellationTokenSource.Dispose();
+            }
         }
 
         private async UniTask Blink(CancellationToken token = default)
@@ -72,7 +76,7 @@ namespace Escaplanet.Scripts.Test.Mock
             }
         }
 
-        void ApplyExplosionForce(Collider2D targetCollider)
+        private void ApplyExplosionForce(Collider2D targetCollider)
         {
             var targetRigidbody = targetCollider.GetComponent<Rigidbody2D>();
 

@@ -1,19 +1,19 @@
 {
-    "name": "Escaplanet.Ingame.System",
-    "rootNamespace": "",
-    "references": [
-        "GUID:27f430c1a89f4094fa91c81187b77d57",
-        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
-        "GUID:77221876cc6b8244180b96e320b1bcd4",
-        "GUID:f51ebe6a0ceec4240a699833d6309b23"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": false,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "name": "Escaplanet.Ingame.System",
+  "rootNamespace": "",
+  "references": [
+    "GUID:27f430c1a89f4094fa91c81187b77d57",
+    "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+    "GUID:77221876cc6b8244180b96e320b1bcd4",
+    "GUID:f51ebe6a0ceec4240a699833d6309b23"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
 }
