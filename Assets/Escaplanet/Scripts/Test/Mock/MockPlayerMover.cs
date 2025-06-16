@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Escaplanet.Scripts.Test
+namespace Escaplanet.Test.Mock
 {
     public enum RotationMethod
     {
@@ -31,12 +30,12 @@ namespace Escaplanet.Scripts.Test
 
         [SerializeField] private float acceleration = 50f;
         [SerializeField] private float movementLerpAmount = 1.0f;
+        private Vector2 _inputAxis;
 
         private bool _isFlyingAway;
+        private Rigidbody2D _rigidbody2D;
 
         private Transform _transform;
-        private Rigidbody2D _rigidbody2D;
-        private Vector2 _inputAxis;
 
         private void Awake()
         {
@@ -60,18 +59,12 @@ namespace Escaplanet.Scripts.Test
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            if (other.gameObject.layer == LayerMask.NameToLayer("Planet"))
-            {
-                _isFlyingAway = false;
-            }
+            if (other.gameObject.layer == LayerMask.NameToLayer("Planet")) _isFlyingAway = false;
         }
 
         private void Move()
         {
-            if (_isFlyingAway)
-            {
-                return;
-            }
+            if (_isFlyingAway) return;
 
             var diff = _transform.position - planetTransform.position;
 
@@ -90,7 +83,7 @@ namespace Escaplanet.Scripts.Test
             var targetSpeed = _inputAxis.x * moveSpeed;
             targetSpeed = Mathf.Lerp(perpendicularSpeed, targetSpeed, movementLerpAmount);
 
-            var accelRate = (acceleration / moveSpeed) * (1.0f / Time.fixedDeltaTime);
+            var accelRate = acceleration / moveSpeed * (1.0f / Time.fixedDeltaTime);
 
             var speedDif = targetSpeed - perpendicularSpeed;
             var movement = speedDif * accelRate;
@@ -141,14 +134,14 @@ namespace Escaplanet.Scripts.Test
 
                 case RotationMethod.RotateTowardsTransform:
                     var currentRotationRTT = _transform.rotation;
-                    float maxDegreesDeltaRTT = rotateSpeed * Time.fixedDeltaTime;
+                    var maxDegreesDeltaRTT = rotateSpeed * Time.fixedDeltaTime;
                     _transform.rotation =
                         Quaternion.RotateTowards(currentRotationRTT, targetRotation, maxDegreesDeltaRTT);
                     break;
 
                 case RotationMethod.RotateTowardsRigidbody:
                     var currentRotationRTR = Quaternion.Euler(0, 0, _rigidbody2D.rotation);
-                    float maxDegreesDeltaRTR = rotateSpeed * Time.fixedDeltaTime;
+                    var maxDegreesDeltaRTR = rotateSpeed * Time.fixedDeltaTime;
                     var nextRotationRTR =
                         Quaternion.RotateTowards(currentRotationRTR, targetRotation, maxDegreesDeltaRTR);
                     _rigidbody2D.MoveRotation(nextRotationRTR.eulerAngles.z);
