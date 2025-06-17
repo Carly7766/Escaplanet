@@ -100,6 +100,11 @@ namespace Escaplanet.Ingame.Data.Common
             return normalized;
         }
 
+        public static Speed Dot(Vector2 a, Vector2 b)
+        {
+            return new Speed(a.X * b.X + a.Y * b.Y);
+        }
+
         #endregion
     }
 }
