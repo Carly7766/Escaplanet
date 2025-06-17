@@ -13,9 +13,9 @@ namespace Escaplanet.Ingame.Framework.Attract
         private readonly HashSet<IAttractSourceEntity> _affectingSources = new();
         private IEntityIdGenerator _entityIdGenerator;
         private readonly Subject<EntityId> _onDestroySubject = new();
-        private Rigidbody2D _rigidbody2D;
 
         private Transform _transform;
+        private Rigidbody2D _rigidbody2D;
 
 
         private void Awake()
