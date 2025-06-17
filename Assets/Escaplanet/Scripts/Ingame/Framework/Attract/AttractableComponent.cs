@@ -28,7 +28,6 @@ namespace Escaplanet.Ingame.Framework.Attract
         {
             _onDestroySubject.OnNext(Id);
             _onDestroySubject.OnCompleted();
-            Dispose();
         }
 
         public EntityId Id { get; private set; }
@@ -59,15 +58,9 @@ namespace Escaplanet.Ingame.Framework.Attract
                 NearestSource = null;
         }
 
-        public void Initialize(IEntityIdGenerator entityIdGenerator)
+        public void Initialize(EntityId id)
         {
-            _entityIdGenerator = entityIdGenerator;
-            Id = entityIdGenerator.Generate();
-        }
-
-        public void Dispose()
-        {
-            _entityIdGenerator.Recycle(Id);
+            Id = id;
         }
     }
 }

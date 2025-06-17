@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Escaplanet.Ingame.Composition.Ingame;
 using Escaplanet.Ingame.Data.Attract;
 using Escaplanet.Ingame.Data.EntityId;
 using Escaplanet.Ingame.System.Attract;
@@ -27,13 +28,15 @@ namespace Escaplanet.Ingame.Composition.Planet
 
             builder.RegisterFactory<GameObject, Vector2, IAttractableEntity>(container =>
             {
-                var entityIdGenerator = container.Resolve<IEntityIdGenerator>();
+                var entityIdScheduler = container.Resolve<EntityIdScheduler>();
                 var attractAreaDetectionSystem = container.Resolve<IAttractAreaDetectionSystem>();
                 return (bombPrefab, spawnPosition) =>
                 {
                     var entity = container.Instantiate(bombPrefab, spawnPosition, Quaternion.identity)
                         .GetComponent<IAttractableEntity>();
-                    entity.Initialize(entityIdGenerator);
+
+                    entityIdScheduler.AttachAndScheduleRecycleEntityId(entity);
+
                     attractAreaDetectionSystem.RegisterAttractable(entity);
                     return entity;
                 };

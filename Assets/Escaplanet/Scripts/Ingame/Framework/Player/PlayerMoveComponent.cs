@@ -16,7 +16,6 @@ namespace Escaplanet.Ingame.Framework.Player
         [SerializeField] private float movementLerpAmount = 1f;
         [SerializeField] private float rotateSpeed = 10f; // Degrees per second
 
-        [SerializeField] private IEntityIdGenerator _entityIdGenerator;
         private readonly Subject<EntityId> _onDestroySubject = new();
 
         private Rigidbody2D _rigidbody2D;
@@ -32,9 +31,12 @@ namespace Escaplanet.Ingame.Framework.Player
         {
             _onDestroySubject.OnNext(Id);
             _onDestroySubject.OnCompleted();
-            Dispose();
         }
 
+        public void Initialize(EntityId id)
+        {
+            Id = id;
+        }
 
         public EntityId Id { get; private set; }
         public bool IsActive => isActiveAndEnabled;
@@ -59,17 +61,6 @@ namespace Escaplanet.Ingame.Framework.Player
         public void Rotate(float angle)
         {
             _rigidbody2D.MoveRotation(angle);
-        }
-
-        public void Initialize(IEntityIdGenerator entityIdGenerator)
-        {
-            _entityIdGenerator = entityIdGenerator;
-            Id = entityIdGenerator.Generate();
-        }
-
-        public void Dispose()
-        {
-            _entityIdGenerator.Recycle(Id);
         }
 
         //TODO: System側に実装を移す

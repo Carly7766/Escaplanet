@@ -5,6 +5,7 @@ using Escaplanet.Ingame.Data.EntityId;
 using R3;
 using R3.Triggers;
 using UnityEngine;
+using NotImplementedException = System.NotImplementedException;
 using Vector2 = Escaplanet.Ingame.Data.Common.Vector2;
 
 namespace Escaplanet.Ingame.Framework.Planet.Attract
@@ -19,7 +20,6 @@ namespace Escaplanet.Ingame.Framework.Planet.Attract
         private readonly HashSet<IAttractableEntity> _attractablesInArea = new();
         private CircleCollider2D _attractAreaCollider;
 
-        private IEntityIdGenerator _entityIdGenerator;
         private readonly Subject<EntityId> _onDestroySubject = new();
         private CircleCollider2D _planetCollider;
 
@@ -46,7 +46,6 @@ namespace Escaplanet.Ingame.Framework.Planet.Attract
         {
             _onDestroySubject.OnNext(Id);
             _onDestroySubject.OnCompleted();
-            Dispose();
         }
 
         public EntityId Id { get; private set; }
@@ -54,6 +53,11 @@ namespace Escaplanet.Ingame.Framework.Planet.Attract
         public bool IsActive => isActiveAndEnabled;
         public bool IsDestroyed => !this;
         Observable<EntityId> IEntity.OnDestroy => _onDestroySubject;
+
+        public void Initialize(EntityId id)
+        {
+            Id = id;
+        }
 
         public Vector2 Position => new(_transform.position.x, _transform.position.y);
 
@@ -74,17 +78,6 @@ namespace Escaplanet.Ingame.Framework.Planet.Attract
         public void RemoveAttractableFromArea(IAttractableEntity attractable)
         {
             _attractablesInArea.Remove(attractable);
-        }
-
-        public void Initialize(IEntityIdGenerator entityIdGenerator)
-        {
-            _entityIdGenerator = entityIdGenerator;
-            Id = entityIdGenerator.Generate();
-        }
-
-        public void Dispose()
-        {
-            _entityIdGenerator.Recycle(Id);
         }
     }
 }

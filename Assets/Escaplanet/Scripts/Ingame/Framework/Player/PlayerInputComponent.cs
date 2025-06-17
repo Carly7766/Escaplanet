@@ -12,12 +12,21 @@ namespace Escaplanet.Ingame.Framework.Player
     {
         [SerializeField] private InputActionReference actionMove;
         [SerializeField] private InputActionReference actionJump;
+
+        public EntityId Id { get; private set; }
+        public bool IsActive => isActiveAndEnabled;
+        public bool IsDestroyed => !this;
+        private Subject<EntityId> onDestroySubject = new();
+        Observable<EntityId> IEntity.OnDestroy => onDestroySubject;
+
+        public void Initialize(EntityId id)
+        {
+            Id = id;
+        }
+
         public float MoveInput { get; private set; }
         private Subject<Unit> onJumpSubject = new();
         public Observable<Unit> OnJump => onJumpSubject;
-
-        private IEntityIdGenerator _entityIdGenerator;
-        private Subject<EntityId> onDestroySubject = new();
 
         private void Awake()
         {
@@ -29,9 +38,9 @@ namespace Escaplanet.Ingame.Framework.Player
 
         private void OnDestroy()
         {
+            onJumpSubject.OnCompleted();
             onDestroySubject.OnNext(Id);
             onDestroySubject.OnCompleted();
-            Dispose();
         }
 
         private void OnEnable()
@@ -44,22 +53,6 @@ namespace Escaplanet.Ingame.Framework.Player
         {
             actionMove.action.Disable();
             actionJump.action.Disable();
-        }
-
-        public EntityId Id { get; private set; }
-        public bool IsActive => isActiveAndEnabled;
-        public bool IsDestroyed => !this;
-        Observable<EntityId> IEntity.OnDestroy => onDestroySubject;
-
-        public void Initialize(IEntityIdGenerator entityIdGenerator)
-        {
-            _entityIdGenerator = entityIdGenerator;
-            Id = entityIdGenerator.Generate();
-        }
-
-        public void Dispose()
-        {
-            _entityIdGenerator.Recycle(Id);
         }
     }
 }
