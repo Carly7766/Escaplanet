@@ -4,13 +4,13 @@ using R3;
 
 namespace Escaplanet.Ingame.Data
 {
-    public interface IEntity : IDisposable
+    public interface IEntity
     {
         EntityId.EntityId Id { get; }
         bool IsActive { get; }
         bool IsDestroyed { get; }
         Observable<EntityId.EntityId> OnDestroy { get; }
 
-        void Initialize(IEntityIdGenerator entityIdGenerator);
+        void Initialize(EntityId.EntityId id);
     }
 }

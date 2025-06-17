@@ -16,7 +16,7 @@ namespace Escaplanet.Ingame.Composition.Ingame
 
             builder.Register<PooledEntityIdGenerator>(Lifetime.Singleton).AsImplementedInterfaces();
 
-            builder.RegisterEntryPoint<EntityInitializer>();
+            builder.RegisterEntryPoint<EntityIdScheduler>(Lifetime.Singleton).AsSelf();
         }
     }
 }
