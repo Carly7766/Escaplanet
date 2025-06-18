@@ -33,6 +33,7 @@ namespace Escaplanet.Ingame.System.Player
         public void FixedTick()
         {
             if (_attractableEntity.NearestSource == null) return;
+            if (_playerMoveEntity.IsFlayingAway) return;
 
             // Rotate
             var direction = _attractableEntity.NearestSource.Position.Subtract(_playerMoveEntity.Position).Normalize();
@@ -44,9 +45,6 @@ namespace Escaplanet.Ingame.System.Player
             var nextRotationSR = Quaternion.Slerp(currentRotationSR, targetRotation,
                 _playerMoveEntity.RotateSpeed * Time.fixedDeltaTime);
             _playerMoveEntity.Rotate(nextRotationSR.eulerAngles.z);
-
-
-            if (_playerMoveEntity.IsFlayingAway) return;
 
             var diff = _playerMoveEntity.Position.Subtract(_attractableEntity.NearestSource.Position);
 
