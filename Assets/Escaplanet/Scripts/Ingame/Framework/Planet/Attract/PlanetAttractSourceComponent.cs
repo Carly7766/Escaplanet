@@ -31,6 +31,8 @@ namespace Escaplanet.Ingame.Framework.Planet.Attract
             _planetCollider = GetComponent<CircleCollider2D>();
             _attractAreaCollider = _transform.GetChild(0).GetComponent<CircleCollider2D>();
 
+            OnUpdateAttractArea = this.UpdateAsObservable();
+
             OnEnterAttractArea = _attractAreaCollider
                 .OnTriggerEnter2DAsObservable()
                 .Select(o => o.GetComponent<IAttractableEntity>())
@@ -67,6 +69,7 @@ namespace Escaplanet.Ingame.Framework.Planet.Attract
         public float Radius => _planetCollider.radius * Mathf.Max(_transform.lossyScale.x, _transform.lossyScale.y);
 
         public IReadOnlyCollection<IAttractableEntity> AttractablesInArea => _attractablesInArea;
+        public Observable<Unit> OnUpdateAttractArea { get; private set; }
         public Observable<IAttractableEntity> OnEnterAttractArea { get; private set; }
         public Observable<IAttractableEntity> OnExitAttractArea { get; private set; }
 

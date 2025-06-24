@@ -26,8 +26,12 @@ namespace Escaplanet.Ingame.System.Attract
                 .Subscribe(_ => UnregisterAttractSource(source.Id))
                 .AddTo(disposable);
 
+            source.OnUpdateAttractArea
+                .Subscribe(_ => UpdateNearest(source))
+                .AddTo(disposable);
+
             source.OnEnterAttractArea
-                .Subscribe(a => { OnSourceEnter(source, a); })
+                .Subscribe(a => OnSourceEnter(source, a))
                 .AddTo(disposable);
 
             source.OnExitAttractArea
@@ -80,33 +84,32 @@ namespace Escaplanet.Ingame.System.Attract
         {
             source.AddAttractableInArea(attractable);
             attractable.AddAffectingSource(source);
-            UpdateNearest(attractable, source);
         }
 
         private void OnSourceExit(IAttractSourceEntity source, IAttractableEntity attractable)
         {
             source.RemoveAttractableFromArea(attractable);
             attractable.RemoveAffectingSource(source);
-            if (attractable.NearestSource == source) RecalculateNearest(attractable);
         }
 
-        private void UpdateNearest(IAttractableEntity attractable, IAttractSourceEntity newSource)
+        private void UpdateNearest(IAttractSourceEntity source)
         {
-            var current = attractable.NearestSource;
-            var dNew = newSource.Position.Subtract(attractable.Position).Magnitude();
-            var dCur = current != null
-                ? current.Position.Subtract(attractable.Position).Magnitude()
-                : float.MaxValue;
-            if (dNew < dCur)
-                attractable.NearestSource = newSource;
-        }
+            foreach (var attractable in source.AttractablesInArea)
+            {
+                if (attractable.NearestSource == null)
+                {
+                    attractable.NearestSource = source;
+                }
 
-        private void RecalculateNearest(IAttractableEntity attractable)
-        {
-            var next = attractable.AffectingSources
-                .OrderBy(s => s.Position.Subtract(attractable.Position).Magnitude())
-                .FirstOrDefault();
-            attractable.NearestSource = next;
+                var newDistance = attractable.Position.Subtract(source.Position).SquareMagnitude();
+                var currentDistance =
+                    attractable.Position.Subtract(attractable.NearestSource.Position).SquareMagnitude();
+
+                if (newDistance < currentDistance)
+                {
+                    attractable.NearestSource = source;
+                }
+            }
         }
     }
 }

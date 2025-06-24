@@ -93,6 +93,11 @@ namespace Escaplanet.Ingame.Data.Common
             return MathF.Sqrt(X * X + Y * Y);
         }
 
+        public float SquareMagnitude()
+        {
+            return X * X + Y * Y;
+        }
+
         public Vector2 Normalize()
         {
             var magnitude = Magnitude();

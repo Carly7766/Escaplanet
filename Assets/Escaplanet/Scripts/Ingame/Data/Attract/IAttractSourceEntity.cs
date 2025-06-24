@@ -14,6 +14,7 @@ namespace Escaplanet.Ingame.Data.Attract
 
         IReadOnlyCollection<IAttractableEntity> AttractablesInArea { get; }
 
+        Observable<Unit> OnUpdateAttractArea { get; }
         Observable<IAttractableEntity> OnEnterAttractArea { get; }
         Observable<IAttractableEntity> OnExitAttractArea { get; }
     }
