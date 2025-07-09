@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Escaplanet/Scenes/SampleScene.unity
+    path: Assets/Escaplanet/Scenes/Ingame.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Escaplanet/Scenes/Result.unity
+    guid: f91fef5dc11b926498a7a2a36b89d2cc
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 6648de060be92974aa3b826d815037c7, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: f07b66a275ce0ef43aea3dbc13707029, type: 3}
