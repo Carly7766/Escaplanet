@@ -4,7 +4,6 @@ using System.Linq;
 using Escaplanet.Ingame.Data.Attract;
 using Escaplanet.Ingame.Data.EntityId;
 using R3;
-using UnityEngine;
 
 namespace Escaplanet.Ingame.System.Attract
 {
@@ -96,19 +95,13 @@ namespace Escaplanet.Ingame.System.Attract
         {
             foreach (var attractable in source.AttractablesInArea)
             {
-                if (attractable.NearestSource == null)
-                {
-                    attractable.NearestSource = source;
-                }
+                if (attractable.NearestSource == null) attractable.NearestSource = source;
 
                 var newDistance = attractable.Position.Subtract(source.Position).SquareMagnitude();
                 var currentDistance =
                     attractable.Position.Subtract(attractable.NearestSource.Position).SquareMagnitude();
 
-                if (newDistance < currentDistance)
-                {
-                    attractable.NearestSource = source;
-                }
+                if (newDistance < currentDistance) attractable.NearestSource = source;
             }
         }
     }

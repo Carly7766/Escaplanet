@@ -40,7 +40,7 @@ namespace Escaplanet.Test.Mock
             var targetPosition = NearestPlanetTransform.position +
                                  new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad), 0) *
                                  (distance * distanceMultiplier);
-            
+
             var lerpedPosition = Vector3.Lerp(_transform.position, targetPosition, Time.deltaTime * lerpAmount);
             lerpedPosition.z = _transform.position.z; // Keep the z position unchanged
 

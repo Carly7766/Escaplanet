@@ -7,8 +7,7 @@ namespace Escaplanet.Ingame.Data.Attract
     {
         Vector2 Position { get; }
         float Mass { get; }
-        
-        
+
 
         IReadOnlyCollection<IAttractSourceEntity> AffectingSources { get; }
         IAttractSourceEntity NearestSource { get; set; }

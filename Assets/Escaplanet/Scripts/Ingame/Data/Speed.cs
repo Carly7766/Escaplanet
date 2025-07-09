@@ -2,7 +2,7 @@
 
 namespace Escaplanet.Ingame.Data
 {
-    public class Speed : IEquatable<Speed>
+    public struct Speed : IEquatable<Speed>
     {
         public readonly float Value;
 
@@ -20,10 +20,7 @@ namespace Escaplanet.Ingame.Data
 
         public override bool Equals(object obj)
         {
-            if (obj is Speed otherSpeed)
-            {
-                return Equals(otherSpeed);
-            }
+            if (obj is Speed otherSpeed) return Equals(otherSpeed);
 
             return false;
         }
