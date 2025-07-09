@@ -1,0 +1,16 @@
+{
+  "name": "Escaplanet.Root.Adapter",
+  "rootNamespace": "",
+  "references": [
+    "GUID:00eb17cbe76e56246805c25e6e6ccac3"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
