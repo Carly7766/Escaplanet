@@ -22,10 +22,7 @@ namespace Escaplanet.Ingame.Composition.Ingame
 
         public void Start()
         {
-            foreach (var entity in entities)
-            {
-                AttachAndScheduleRecycleEntityId(entity);
-            }
+            foreach (var entity in entities) AttachAndScheduleRecycleEntityId(entity);
         }
 
         public void AttachAndScheduleRecycleEntityId(IEntity entity)
