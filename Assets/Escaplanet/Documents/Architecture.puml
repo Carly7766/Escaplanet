@@ -1,0 +1,50 @@
+﻿@startuml
+title Escaplanet Architecture Overview
+
+note as Note
+この図は、Escaplanetのアーキテクチャを示しています。
+ヘキサゴナルアーキテクチャのポート/アダプタを参考に、
+Coreで入出力を定義したインターフェイスを用意し
+PresentationでMonoBehaviourが実装します。
+
+GameLogicで実際のコンポーネント同士のやり取りや関係を定義しています。
+
+基本的にCoreで用意したイベントによって駆動し、
+EntryPointは各CoreのイベントとGameLogicのコンポーネントを繋ぎます。
+
+CompositionはVContainerのLifetimeScopeを用いて依存関係を構築します。
+end note
+
+package Core
+{
+}
+
+package GameLogic
+{
+}
+
+package EntryPoint
+{ 
+}
+
+package Presentation <<MonoBehaviour>>
+{
+}
+
+package Composition <<LifetimeScope>>
+{
+}
+
+GameLogic .up.> Core
+
+EntryPoint .up.> Core
+EntryPoint .up.> GameLogic
+
+Presentation .right.> Core
+
+Composition .up.> Core
+Composition .up.> GameLogic
+Composition .up.> EntryPoint
+Composition .up.> Presentation
+
+@enduml
