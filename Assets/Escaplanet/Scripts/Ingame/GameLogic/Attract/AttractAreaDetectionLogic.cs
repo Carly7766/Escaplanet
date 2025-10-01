@@ -17,5 +17,15 @@ namespace Escaplanet.Ingame.GameLogic.Attract
             source.RemoveAttractableInArea(attractable);
             attractable.RemoveAffectingSource(source);
         }
+
+        public void ExcludeDestroyedSources(IAttractableCore attractable)
+        {
+            var destroyedSources = attractable.AffectingSources.Where(s => s.IsDestroyed).ToList();
+
+            foreach (var destroyedSource in destroyedSources)
+            {
+                attractable.RemoveAffectingSource(destroyedSource);
+            }
+        }
     }
 }

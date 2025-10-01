@@ -12,6 +12,8 @@ namespace Escaplanet.Ingame.Core.Attract
         ScalarFloat SurfaceGravity { get; }
         ScalarFloat Radius { get; }
 
+        bool IsDestroyed { get; }
+
         IReadOnlyCollection<IReadonlyAttractableCore> AttractablesInArea { get; }
     }
 
