@@ -27,6 +27,8 @@ namespace Escaplanet.Ingame.Presentation.Attract
         public ScalarFloat Radius =>
             new(_planetCollider.radius * Mathf.Max(_transform.localScale.x, _transform.localScale.y));
 
+        public bool IsDestroyed => this == null;
+
         public IReadOnlyCollection<IReadonlyAttractableCore> AttractablesInArea => _attractablesInArea;
         
         

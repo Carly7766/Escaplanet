@@ -6,5 +6,6 @@ namespace Escaplanet.Ingame.GameLogic.Attract
     {
         void OnSourceEnter(IAttractSourceCore source, IAttractableCore attractable);
         void OnSourceExit(IAttractSourceCore source, IAttractableCore attractable);
+        void ExcludeDestroyedSources(IAttractableCore attractable);
     }
 }
