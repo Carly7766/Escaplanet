@@ -4,6 +4,6 @@ namespace Escaplanet.Ingame.GameLogic.Attract
 {
     public interface IAttractUpdateLogic
     {
-        void UpdateAttract(IReadonlyAttractSourceCore source);
+        void UpdateAttract(IReadonlyAttractableCore attractable);
     }
 }

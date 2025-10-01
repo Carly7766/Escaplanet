@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Escaplanet.Root.Common.ValueObject;
+using R3;
 
 namespace Escaplanet.Ingame.Core.Attract
 {
@@ -11,6 +12,9 @@ namespace Escaplanet.Ingame.Core.Attract
         IReadOnlyCollection<IReadonlyAttractSourceCore> AffectingSources { get; }
         IReadonlyAttractSourceCore NearestSource { get; }
 
+        Observable<IAttractSourceCore> OnEnterAttractArea { get; }
+        Observable<IAttractSourceCore> OnExitAttractArea { get; }
+
         void Attract(Vector2 force);
     }
 
@@ -18,6 +22,5 @@ namespace Escaplanet.Ingame.Core.Attract
     {
         void AddAffectingSource(IReadonlyAttractSourceCore source);
         void RemoveAffectingSource(IReadonlyAttractSourceCore source);
-        void SetNearestSource(IReadonlyAttractSourceCore source);
     }
 }

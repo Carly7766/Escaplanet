@@ -299,6 +299,7 @@ GameObject:
   - component: {fileID: 254716070}
   - component: {fileID: 254716069}
   - component: {fileID: 254716071}
+  - component: {fileID: 254716072}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -450,6 +451,22 @@ MonoBehaviour:
   angularVelocity: 0
   smoothTime: 0.1
   maxRotateSpeed: 360
+--- !u!114 &254716072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254716066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d38e4c4cbd4cc099c996e8051b2f74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: Escaplanet.Ingame.Composition.LifetimeScope.AttractLogicLifetimeScope
+  autoRun: 1
+  autoInjectGameObjects: []
 --- !u!1 &387440867
 GameObject:
   m_ObjectHideFlags: 0
@@ -1059,7 +1076,7 @@ GameObject:
   - component: {fileID: 1219661546}
   m_Layer: 7
   m_Name: AttractArea
-  m_TagString: Untagged
+  m_TagString: AttractArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1252,7 +1269,7 @@ GameObject:
   - component: {fileID: 1475956098}
   m_Layer: 7
   m_Name: AttractArea
-  m_TagString: Untagged
+  m_TagString: AttractArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1347,7 +1364,7 @@ GameObject:
   - component: {fileID: 1649885956}
   m_Layer: 7
   m_Name: AttractArea
-  m_TagString: Untagged
+  m_TagString: AttractArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1438,7 +1455,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1917737020}
-  - component: {fileID: 1917737019}
+  - component: {fileID: 1917737021}
   m_Layer: 0
   m_Name: AttractLifetimeScope
   m_TagString: Untagged
@@ -1446,22 +1463,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1917737019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917737018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a898b8c86ad492bb3aa2dd02927d84d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentReference:
-    TypeName: 
-  autoRun: 1
-  autoInjectGameObjects: []
 --- !u!4 &1917737020
 Transform:
   m_ObjectHideFlags: 0
@@ -1477,6 +1478,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1917737021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917737018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 287bfc73577a451f8bdb4f581ff3b2bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: 
+  autoRun: 1
+  autoInjectGameObjects: []
 --- !u!1 &1923789148
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,6 +1507,7 @@ GameObject:
   - component: {fileID: 1923789152}
   - component: {fileID: 1923789149}
   - component: {fileID: 1923789153}
+  - component: {fileID: 1923789154}
   m_Layer: 0
   m_Name: Box
   m_TagString: Untagged
@@ -1648,6 +1666,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9946eb229acb4830a25ae0785e0c6c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1923789154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923789148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a898b8c86ad492bb3aa2dd02927d84d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: Escaplanet.Ingame.Composition.LifetimeScope.AttractLogicLifetimeScope
+  autoRun: 1
+  autoInjectGameObjects: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

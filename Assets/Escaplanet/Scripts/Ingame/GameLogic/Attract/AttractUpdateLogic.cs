@@ -5,11 +5,12 @@ namespace Escaplanet.Ingame.GameLogic.Attract
 {
     public class AttractUpdateLogic : IAttractUpdateLogic
     {
-        public void UpdateAttract(IReadonlyAttractSourceCore source)
+        public void UpdateAttract(IReadonlyAttractableCore attractable)
         {
-            var sourceMass = source.SurfaceGravity * (source.Radius * source.Radius) / source.GravityConstant;
-            foreach (var attractable in source.AttractablesInArea)
+            foreach (var source in attractable.AffectingSources)
             {
+                var sourceMass = source.SurfaceGravity * (source.Radius * source.Radius) / source.GravityConstant;
+
                 var direction = source.Position - attractable.Position;
                 var distance = direction.Magnitude();
 

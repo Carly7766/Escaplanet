@@ -16,24 +16,23 @@ namespace Escaplanet.Ingame.GameLogic.Attract
             _unityGlobalPort = unityGlobalPort;
         }
 
-        public void UpdateRotate(IReadonlyAttractSourceCore source)
+        public void UpdateRotate(IRotateAttractableCore attractable)
         {
-            foreach (var attractable in source.AttractablesInArea.OfType<IRotateAttractableCore>())
-            {
-                var direction = (attractable.NearestSource.Position - attractable.Position).Normalize();
-                var angle = new ScalarFloat(MathF.Atan2(direction.Y, direction.X) * Mathf.Rad2Deg);
-                var targetAngle = angle + new ScalarFloat(90f);
+            if (attractable.NearestSource == null) return;
 
-                var attractableAngularVelocity = attractable.AngularVelocity;
+            var direction = (attractable.NearestSource.Position - attractable.Position).Normalize();
+            var angle = new ScalarFloat(MathF.Atan2(direction.Y, direction.X) * Mathf.Rad2Deg);
+            var targetAngle = angle + new ScalarFloat(90f);
 
-                var newAngle = SlerpAngle(attractable.Rotation, targetAngle, attractable.PreviousTargetRotation,
-                    ref attractableAngularVelocity, attractable.SmoothTime, attractable.MaxRotateSpeed,
-                    _unityGlobalPort.FixedDeltaTime);
+            var attractableAngularVelocity = attractable.AngularVelocity;
 
-                attractable.Rotate(newAngle);
-                attractable.PreviousTargetRotation = targetAngle;
-                attractable.AngularVelocity = attractableAngularVelocity;
-            }
+            var newAngle = SlerpAngle(attractable.Rotation, targetAngle, attractable.PreviousTargetRotation,
+                ref attractableAngularVelocity, attractable.SmoothTime, attractable.MaxRotateSpeed,
+                _unityGlobalPort.FixedDeltaTime);
+
+            attractable.Rotate(newAngle);
+            attractable.PreviousTargetRotation = targetAngle;
+            attractable.AngularVelocity = attractableAngularVelocity;
         }
 
         private static ScalarFloat WrapNeg180To180(ScalarFloat degrees)

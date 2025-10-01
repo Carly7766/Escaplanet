@@ -15,7 +15,6 @@ namespace Escaplanet.Ingame.Presentation.Attract
 
         private Transform _transform;
         private CircleCollider2D _planetCollider;
-        private CircleCollider2D _attractAreaCollider;
 
         private readonly HashSet<IReadonlyAttractableCore> _attractablesInArea = new();
 
@@ -29,34 +28,12 @@ namespace Escaplanet.Ingame.Presentation.Attract
             new(_planetCollider.radius * Mathf.Max(_transform.localScale.x, _transform.localScale.y));
 
         public IReadOnlyCollection<IReadonlyAttractableCore> AttractablesInArea => _attractablesInArea;
-
-        public Observable<Unit> OnAttractUpdate { get; private set; }
-        public Observable<IAttractableCore> OnEnterAttractArea { get; private set; }
-        public Observable<IAttractableCore> OnExitAttractArea { get; private set; }
-
-
+        
+        
         private void Awake()
         {
             _transform = transform;
             _planetCollider = GetComponent<CircleCollider2D>();
-            _attractAreaCollider = _transform.GetChild(0).GetComponent<CircleCollider2D>();
-
-            OnAttractUpdate = _attractAreaCollider
-                .FixedUpdateAsObservable()
-                .AsUnitObservable()
-                .TakeUntil(destroyCancellationToken);
-
-            OnEnterAttractArea = _attractAreaCollider
-                .OnTriggerEnter2DAsObservable()
-                .Select(o => o.GetComponent<IAttractableCore>())
-                .Where(a => a != null)
-                .TakeUntil(destroyCancellationToken);
-
-            OnExitAttractArea = _attractAreaCollider
-                .OnTriggerExit2DAsObservable()
-                .Select(o => o.GetComponent<IAttractableCore>())
-                .Where(a => a != null)
-                .TakeUntil(destroyCancellationToken);
         }
 
         public void AddAttractableInArea(IReadonlyAttractableCore attractable)
