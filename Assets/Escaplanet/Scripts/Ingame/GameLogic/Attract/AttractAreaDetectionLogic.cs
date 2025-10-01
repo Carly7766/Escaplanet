@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Escaplanet.Ingame.Core.Attract;
+using UnityEngine;
 
 namespace Escaplanet.Ingame.GameLogic.Attract
 {
@@ -15,15 +16,6 @@ namespace Escaplanet.Ingame.GameLogic.Attract
         {
             source.RemoveAttractableInArea(attractable);
             attractable.RemoveAffectingSource(source);
-        }
-
-        public void DetectNearestSource(IAttractableCore attractable)
-        {
-            attractable.SetNearestSource(
-                attractable.AffectingSources
-                    .OrderBy(s => (attractable.Position - s.Position).SquareMagnitude())
-                    .FirstOrDefault()
-            );
         }
     }
 }

@@ -4,6 +4,6 @@ namespace Escaplanet.Ingame.GameLogic.Attract
 {
     public interface IRotateUpdateLogic
     {
-        void UpdateRotate(IReadonlyAttractSourceCore source);
+        void UpdateRotate(IRotateAttractableCore source);
     }
 }

@@ -13,10 +13,6 @@ namespace Escaplanet.Ingame.Core.Attract
         ScalarFloat Radius { get; }
 
         IReadOnlyCollection<IReadonlyAttractableCore> AttractablesInArea { get; }
-
-        Observable<Unit> OnAttractUpdate { get; }
-        Observable<IAttractableCore> OnEnterAttractArea { get; }
-        Observable<IAttractableCore> OnExitAttractArea { get; }
     }
 
     public interface IAttractSourceCore : IReadonlyAttractSourceCore
