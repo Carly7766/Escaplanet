@@ -8,7 +8,6 @@ namespace Escaplanet.Ingame.Core.Attract
     {
         Vector2 Position { get; }
 
-        ScalarFloat GravityConstant { get; }
         ScalarFloat SurfaceGravity { get; }
         ScalarFloat Radius { get; }
 

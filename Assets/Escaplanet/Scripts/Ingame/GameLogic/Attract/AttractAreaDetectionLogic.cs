@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Escaplanet.Ingame.Core.Attract;
-using UnityEngine;
 
 namespace Escaplanet.Ingame.GameLogic.Attract
 {
@@ -18,14 +17,17 @@ namespace Escaplanet.Ingame.GameLogic.Attract
             attractable.RemoveAffectingSource(source);
         }
 
-        public void ExcludeDestroyedSources(IAttractableCore attractable)
+        public void UpdateNearestSources(IAttractableCore attractable)
         {
-            var destroyedSources = attractable.AffectingSources.Where(s => s.IsDestroyed).ToList();
+            // Remove destroyed sources
+            attractable.AffectingSources.Where(s => s.IsDestroyed).ToList()
+                .ForEach(attractable.RemoveAffectingSource);
 
-            foreach (var destroyedSource in destroyedSources)
-            {
-                attractable.RemoveAffectingSource(destroyedSource);
-            }
+            var nearestSource = attractable.AffectingSources
+                .OrderBy(s => (attractable.Position - s.Position).SquareMagnitude())
+                .FirstOrDefault();
+
+            attractable.SetNearestSource(nearestSource);
         }
     }
 }

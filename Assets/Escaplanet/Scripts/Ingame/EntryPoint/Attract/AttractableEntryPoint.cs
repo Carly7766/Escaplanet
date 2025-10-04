@@ -39,7 +39,7 @@ namespace Escaplanet.Ingame.EntryPoint.Attract
 
         public void FixedTick()
         {
-            _attractAreaDetectionLogic.ExcludeDestroyedSources(_attractable);
+            _attractAreaDetectionLogic.UpdateNearestSources(_attractable);
             _attractUpdateLogic.UpdateAttract(_attractable);
         }
 

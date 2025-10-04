@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Linq;
 using Escaplanet.Ingame.Core.Attract;
 using Escaplanet.Root.Common;
+using Escaplanet.Root.Common.Service;
 using Escaplanet.Root.Common.ValueObject;
-using UnityEngine;
 
 namespace Escaplanet.Ingame.GameLogic.Attract
 {
@@ -21,7 +20,7 @@ namespace Escaplanet.Ingame.GameLogic.Attract
             if (attractable.NearestSource == null) return;
 
             var direction = (attractable.NearestSource.Position - attractable.Position).Normalize();
-            var angle = new ScalarFloat(MathF.Atan2(direction.Y, direction.X) * Mathf.Rad2Deg);
+            var angle = MathFService.Atan2(direction.Y, direction.X) * ScalarFloat.Rad2Deg;
             var targetAngle = angle + new ScalarFloat(90f);
 
             var attractableAngularVelocity = attractable.AngularVelocity;
@@ -39,7 +38,7 @@ namespace Escaplanet.Ingame.GameLogic.Attract
         {
             var a = ((degrees + new ScalarFloat(180f)) % new ScalarFloat(360f) + new ScalarFloat(360f)) %
                 new ScalarFloat(360f) - new ScalarFloat(180);
-            if (ScalarFloat.Abs(a) < ScalarFloat.Epsilon) a = ScalarFloat.Zero;
+            if (MathFService.Abs(a) < ScalarFloat.Epsilon) a = ScalarFloat.Zero;
             return a;
         }
 
@@ -76,7 +75,7 @@ namespace Escaplanet.Ingame.GameLogic.Attract
             var originalTo = target;
 
             var maxChange = maxRotateSpeed * smoothTime;
-            change = ScalarFloat.Clamp(change, -maxChange, maxChange);
+            change = MathFService.Clamp(change, -maxChange, maxChange);
             target = current - change;
 
             var temp = (angularVelocity + omega * change) * deltaTime;
@@ -84,7 +83,7 @@ namespace Escaplanet.Ingame.GameLogic.Attract
 
             var output = target + (change + temp) * exp;
 
-            if (ScalarFloat.Abs(angularVelocity) < ScalarFloat.Epsilon) angularVelocity = ScalarFloat.Zero;
+            if (MathFService.Abs(angularVelocity) < ScalarFloat.Epsilon) angularVelocity = ScalarFloat.Zero;
 
             var overshot = (projTarget > current) ? (output > projTarget) : (output < projTarget);
             if (overshot)

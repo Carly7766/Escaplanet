@@ -4,10 +4,16 @@ namespace Escaplanet.Root.Common.ValueObject
 {
     public struct Vector2 : IEquatable<Vector2>
     {
-        public float X { get; }
-        public float Y { get; }
+        public ScalarFloat X { get; }
+        public ScalarFloat Y { get; }
 
         public Vector2(float x, float y)
+        {
+            X = new ScalarFloat(x);
+            Y = new ScalarFloat(y);
+        }
+
+        public Vector2(ScalarFloat x, ScalarFloat y)
         {
             X = x;
             Y = y;
@@ -56,22 +62,22 @@ namespace Escaplanet.Root.Common.ValueObject
 
         public static Vector2 operator +(Vector2 vector, ScalarFloat scalar)
         {
-            return new Vector2(vector.X + scalar.Value, vector.Y + scalar.Value);
+            return new Vector2(vector.X + scalar, vector.Y + scalar);
         }
 
         public static Vector2 operator -(Vector2 vector, ScalarFloat scalar)
         {
-            return new Vector2(vector.X - scalar.Value, vector.Y - scalar.Value);
+            return new Vector2(vector.X - scalar, vector.Y - scalar);
         }
 
         public static Vector2 operator *(Vector2 vector, ScalarFloat scalar)
         {
-            return new Vector2(vector.X * scalar.Value, vector.Y * scalar.Value);
+            return new Vector2(vector.X * scalar, vector.Y * scalar);
         }
 
         public static Vector2 operator /(Vector2 vector, ScalarFloat scalar)
         {
-            return new Vector2(vector.X / scalar.Value, vector.Y / scalar.Value);
+            return new Vector2(vector.X / scalar, vector.Y / scalar);
         }
 
         #endregion
@@ -80,12 +86,12 @@ namespace Escaplanet.Root.Common.ValueObject
 
         public ScalarFloat Magnitude()
         {
-            return new ScalarFloat(MathF.Sqrt(X * X + Y * Y));
+            return X * X + Y * Y;
         }
 
         public ScalarFloat SquareMagnitude()
         {
-            return new ScalarFloat(X * X + Y * Y);
+            return X * X + Y * Y;
         }
 
         public Vector2 Normalize()
@@ -96,7 +102,12 @@ namespace Escaplanet.Root.Common.ValueObject
                 return new Vector2(0, 0);
             }
 
-            return new Vector2(X / magnitude.Value, Y / magnitude.Value);
+            return new Vector2(X / magnitude, Y / magnitude);
+        }
+
+        public static ScalarFloat Dot(Vector2 a, Vector2 b)
+        {
+            return a.X * b.X + a.Y * b.Y;
         }
 
         #endregion

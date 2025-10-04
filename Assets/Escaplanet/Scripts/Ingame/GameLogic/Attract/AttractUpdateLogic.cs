@@ -1,4 +1,5 @@
 ﻿using Escaplanet.Ingame.Core.Attract;
+using Escaplanet.Root.Common.Service;
 using Escaplanet.Root.Common.ValueObject;
 
 namespace Escaplanet.Ingame.GameLogic.Attract
@@ -7,20 +8,26 @@ namespace Escaplanet.Ingame.GameLogic.Attract
     {
         public void UpdateAttract(IReadonlyAttractableCore attractable)
         {
+            var epsilon2 = MathFService.Pow(ScalarFloat.Epsilon, ScalarFloat.Two);
+            var totalForce = Vector2.Zero;
+
             foreach (var source in attractable.AffectingSources)
             {
-                var sourceMass = source.SurfaceGravity * (source.Radius * source.Radius) / source.GravityConstant;
+                var mu = source.SurfaceGravity * (source.Radius * source.Radius); // = G*M
 
-                var direction = source.Position - attractable.Position;
-                var distance = direction.Magnitude();
+                var dir = source.Position - attractable.Position;
+                var r2 = dir.SquareMagnitude();
 
-                if (distance <= ScalarFloat.Zero) continue;
+                if (r2 < epsilon2) r2 = epsilon2;
 
-                var forceMagnitude = source.GravityConstant * (sourceMass * attractable.Mass) / (distance * distance);
+                var invR = MathFService.InvSqrt(r2);
+                var invR3 = MathFService.Pow(invR, new ScalarFloat(3f));
 
-                var force = direction.Normalize() * forceMagnitude;
-                attractable.Attract(force);
+                var scale = (mu * attractable.Mass) * invR3;
+                totalForce += dir * scale;
             }
+
+            attractable.Attract(totalForce);
         }
     }
 }

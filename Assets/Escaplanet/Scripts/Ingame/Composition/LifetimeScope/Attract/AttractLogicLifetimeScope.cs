@@ -1,7 +1,7 @@
 ﻿using Escaplanet.Ingame.GameLogic.Attract;
 using VContainer;
 
-namespace Escaplanet.Ingame.Composition.LifetimeScope
+namespace Escaplanet.Ingame.Composition.LifetimeScope.Attract
 {
     public class AttractLogicLifetimeScope : VContainer.Unity.LifetimeScope
     {

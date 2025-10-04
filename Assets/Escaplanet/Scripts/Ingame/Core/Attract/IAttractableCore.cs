@@ -22,5 +22,6 @@ namespace Escaplanet.Ingame.Core.Attract
     {
         void AddAffectingSource(IReadonlyAttractSourceCore source);
         void RemoveAffectingSource(IReadonlyAttractSourceCore source);
+        void SetNearestSource(IReadonlyAttractSourceCore source);
     }
 }

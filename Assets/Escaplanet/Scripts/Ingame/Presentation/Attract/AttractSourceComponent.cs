@@ -10,7 +10,6 @@ namespace Escaplanet.Ingame.Presentation.Attract
 {
     public class AttractSourceComponent : MonoBehaviour, IAttractSourceCore
     {
-        [SerializeField] private float gravityConstant = 6.67430e-11f;
         [SerializeField] private float surfaceGravity = 1.0f;
 
         private Transform _transform;
@@ -21,7 +20,6 @@ namespace Escaplanet.Ingame.Presentation.Attract
 
         public Vector2 Position => new(_transform.position.x, _transform.position.y);
 
-        public ScalarFloat GravityConstant => new(gravityConstant);
         public ScalarFloat SurfaceGravity => new(surfaceGravity);
 
         public ScalarFloat Radius =>

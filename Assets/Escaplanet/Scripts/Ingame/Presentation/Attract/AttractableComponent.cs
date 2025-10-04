@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Escaplanet.Ingame.Core.Attract;
 using Escaplanet.Root.Common.ValueObject;
 using R3;
@@ -23,15 +22,7 @@ namespace Escaplanet.Ingame.Presentation.Attract
 
         public IReadOnlyCollection<IReadonlyAttractSourceCore> AffectingSources => _affectingSources;
 
-        public IReadonlyAttractSourceCore NearestSource
-        {
-            get
-            {
-                return _affectingSources
-                    .OrderBy(s => (Position - s.Position).SquareMagnitude())
-                    .FirstOrDefault();
-            }
-        }
+        public IReadonlyAttractSourceCore NearestSource { get; private set; }
 
         public Observable<IAttractSourceCore> OnEnterAttractArea { get; private set; }
         public Observable<IAttractSourceCore> OnExitAttractArea { get; private set; }
@@ -59,7 +50,7 @@ namespace Escaplanet.Ingame.Presentation.Attract
 
         public void Attract(Vector2 force)
         {
-            Rigidbody2D.AddForce(new UnityEngine.Vector2(force.X, force.Y));
+            Rigidbody2D.AddForce(new UnityEngine.Vector2(force.X.Value, force.Y.Value));
         }
 
         public void AddAffectingSource(IReadonlyAttractSourceCore source)
@@ -70,6 +61,11 @@ namespace Escaplanet.Ingame.Presentation.Attract
         public void RemoveAffectingSource(IReadonlyAttractSourceCore source)
         {
             _affectingSources.Remove(source);
+        }
+
+        public void SetNearestSource(IReadonlyAttractSourceCore source)
+        {
+            NearestSource = source;
         }
     }
 }

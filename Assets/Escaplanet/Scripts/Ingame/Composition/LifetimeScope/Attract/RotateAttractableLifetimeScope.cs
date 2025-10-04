@@ -1,10 +1,9 @@
 ﻿using Escaplanet.Ingame.Core.Attract;
 using Escaplanet.Ingame.EntryPoint.Attract;
-using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Escaplanet.Ingame.Composition.LifetimeScope
+namespace Escaplanet.Ingame.Composition.LifetimeScope.Attract
 {
     public class RotateAttractableLifetimeScope : VContainer.Unity.LifetimeScope
     {

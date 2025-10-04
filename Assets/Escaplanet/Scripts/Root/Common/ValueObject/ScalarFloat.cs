@@ -15,6 +15,9 @@ namespace Escaplanet.Root.Common.ValueObject
         #region Constants
 
         public static ScalarFloat Zero => new(0f);
+        public static ScalarFloat One => new(1f);
+        public static ScalarFloat Two => new(2f);
+        public static ScalarFloat Rad2Deg => new(57.29578f);
         public static ScalarFloat Epsilon => new(Mathf.Epsilon);
 
         #endregion
@@ -108,16 +111,26 @@ namespace Escaplanet.Root.Common.ValueObject
 
         #endregion
 
-        #region Utility
+        #region Operators(Vector2)
 
-        public static ScalarFloat Abs(ScalarFloat value)
+        public static Vector2 operator +(ScalarFloat scalar, Vector2 vector)
         {
-            return new ScalarFloat(MathF.Abs(value.Value));
+            return new Vector2(scalar + vector.X, scalar + vector.Y);
         }
 
-        public static ScalarFloat Clamp(ScalarFloat value, ScalarFloat min, ScalarFloat max)
+        public static Vector2 operator -(ScalarFloat scalar, Vector2 vector)
         {
-            return value < min ? min : value > max ? max : value;
+            return new Vector2(scalar - vector.X, scalar - vector.Y);
+        }
+
+        public static Vector2 operator *(ScalarFloat scalar, Vector2 vector)
+        {
+            return new Vector2(scalar * vector.X, scalar * vector.Y);
+        }
+
+        public static Vector2 operator /(ScalarFloat scalar, Vector2 vector)
+        {
+            return new Vector2(scalar / vector.X, scalar / vector.Y);
         }
 
         #endregion
