@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityConstant: 6.6743e-11
-  surfaceGravity: 2
+  surfaceGravity: 12
 --- !u!1 &254716066
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,7 +631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityConstant: 6.6743e-11
-  surfaceGravity: 2
+  surfaceGravity: 12
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,7 +1147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityConstant: 6.6743e-11
-  surfaceGravity: 2
+  surfaceGravity: 12
 --- !u!1 &1219661543
 GameObject:
   m_ObjectHideFlags: 0
