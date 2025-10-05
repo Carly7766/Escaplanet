@@ -49,7 +49,7 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
-  globalPort: {fileID: 4129937418877963330}
+  unityGlobalValuePort: {fileID: 4129937418877963330}
 --- !u!114 &4129937418877963330
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,15 +1,14 @@
-﻿using Escaplanet.Root.Common.ValueObject;
-
+﻿
 namespace Escaplanet.Ingame.Core.Attract
 {
     public interface IRotateAttractableCore : IAttractableCore
     {
-        ScalarFloat Rotation { get; }
+        float Rotation { get; }
 
-        ScalarFloat PreviousTargetRotation { get; set; }
-        ScalarFloat AngularVelocity { get; set; }
-        ScalarFloat SmoothTime { get; }
-        ScalarFloat MaxRotateSpeed { get; }
-        void Rotate(ScalarFloat angle);
+        float PreviousTargetRotation { get; set; }
+        float AngularVelocity { get; set; }
+        float SmoothTime { get; }
+        float MaxRotateSpeed { get; }
+        void Rotate(float angle);
     }
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/Assets/Escaplanet/Scripts/Root/Common/IUnityGlobalPort.cs">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/Assets/Escaplanet/Scripts/Root/Common/IUnityGlobalPort.cs" />
+              <option name="originalContent" value="using Escaplanet.Root.Common.ValueObject;&#10;&#10;namespace Escaplanet.Root.Common&#10;{&#10;    public interface IUnityGlobalPort&#10;    {&#10;        float FixedDeltaTime { get; }&#10;    }&#10;}" />
+              <option name="updatedContent" value="namespace Escaplanet.Root.Common&#13;&#10;{&#13;&#10;    public interface IUnityGlobalPort&#13;&#10;    {&#13;&#10;        float FixedDeltaTime { get; }&#13;&#10;    }&#13;&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

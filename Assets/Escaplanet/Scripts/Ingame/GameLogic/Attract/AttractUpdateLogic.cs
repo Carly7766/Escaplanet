@@ -1,5 +1,4 @@
 ﻿using Escaplanet.Ingame.Core.Attract;
-using Escaplanet.Root.Common.ValueObject;
 
 namespace Escaplanet.Ingame.GameLogic.Attract
 {
@@ -14,7 +13,7 @@ namespace Escaplanet.Ingame.GameLogic.Attract
                 var direction = source.Position - attractable.Position;
                 var distance = direction.Magnitude();
 
-                if (distance <= ScalarFloat.Zero) continue;
+                if (distance <= 0f) continue;
 
                 var forceMagnitude = source.GravityConstant * (sourceMass * attractable.Mass) / (distance * distance);
 

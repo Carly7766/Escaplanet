@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Escaplanet.Ingame.Core.Attract;
-using UnityEngine;
 
 namespace Escaplanet.Ingame.GameLogic.Attract
 {
