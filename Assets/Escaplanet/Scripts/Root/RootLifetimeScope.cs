@@ -7,11 +7,12 @@ namespace Escaplanet.Root
 {
     public class RootLifetimeScope : LifetimeScope
     {
-        [SerializeField] private UnityGlobalPort globalPort;
+        [SerializeField] private UnityGlobalValuePort unityGlobalValuePort;
 
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterComponent(globalPort).AsImplementedInterfaces();
+            builder.RegisterComponent(unityGlobalValuePort).AsImplementedInterfaces();
+            builder.Register<UnityFloatMathPort>(Lifetime.Singleton).As<IFloatMathPort>();
         }
     }
 }

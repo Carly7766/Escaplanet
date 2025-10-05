@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
 using Escaplanet.Ingame.Core.Attract;
-using Escaplanet.Root.Common.ValueObject;
-using R3;
-using R3.Triggers;
 using UnityEngine;
 using Vector2 = Escaplanet.Root.Common.ValueObject.Vector2;
 
@@ -21,11 +18,11 @@ namespace Escaplanet.Ingame.Presentation.Attract
 
         public Vector2 Position => new(_transform.position.x, _transform.position.y);
 
-        public ScalarFloat GravityConstant => new(gravityConstant);
-        public ScalarFloat SurfaceGravity => new(surfaceGravity);
+        public float GravityConstant => gravityConstant;
+        public float SurfaceGravity => surfaceGravity;
 
-        public ScalarFloat Radius =>
-            new(_planetCollider.radius * Mathf.Max(_transform.localScale.x, _transform.localScale.y));
+        public float Radius =>
+            _planetCollider.radius * Mathf.Max(_transform.localScale.x, _transform.localScale.y);
 
         public bool IsDestroyed => this == null;
 

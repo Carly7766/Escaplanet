@@ -52,51 +52,47 @@ namespace Escaplanet.Root.Common.ValueObject
 
         #endregion
 
-        #region Operators(ScalarFloat)
+        #region Operators(float)
 
-        public static Vector2 operator +(Vector2 vector, ScalarFloat scalar)
+        public static Vector2 operator +(Vector2 vector, float scalar)
         {
-            return new Vector2(vector.X + scalar.Value, vector.Y + scalar.Value);
+            return new Vector2(vector.X + scalar, vector.Y + scalar);
         }
 
-        public static Vector2 operator -(Vector2 vector, ScalarFloat scalar)
+        public static Vector2 operator -(Vector2 vector, float scalar)
         {
-            return new Vector2(vector.X - scalar.Value, vector.Y - scalar.Value);
+            return new Vector2(vector.X - scalar, vector.Y - scalar);
         }
 
-        public static Vector2 operator *(Vector2 vector, ScalarFloat scalar)
+        public static Vector2 operator *(Vector2 vector, float scalar)
         {
-            return new Vector2(vector.X * scalar.Value, vector.Y * scalar.Value);
+            return new Vector2(vector.X * scalar, vector.Y * scalar);
         }
 
-        public static Vector2 operator /(Vector2 vector, ScalarFloat scalar)
+        public static Vector2 operator /(Vector2 vector, float scalar)
         {
-            return new Vector2(vector.X / scalar.Value, vector.Y / scalar.Value);
+            return new Vector2(vector.X / scalar, vector.Y / scalar);
         }
 
         #endregion
 
         #region Utility
 
-        public ScalarFloat Magnitude()
+        public float Magnitude()
         {
-            return new ScalarFloat(MathF.Sqrt(X * X + Y * Y));
+            return MathF.Sqrt(X * X + Y * Y);
         }
 
-        public ScalarFloat SquareMagnitude()
+        public float SquareMagnitude()
         {
-            return new ScalarFloat(X * X + Y * Y);
+            return X * X + Y * Y;
         }
 
         public Vector2 Normalize()
         {
             var magnitude = Magnitude();
-            if (magnitude.Value == 0)
-            {
-                return new Vector2(0, 0);
-            }
-
-            return new Vector2(X / magnitude.Value, Y / magnitude.Value);
+            if (magnitude <= 0) return Zero;
+            return new Vector2(X / magnitude, Y / magnitude);
         }
 
         #endregion

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Escaplanet.Ingame.Core.Attract;
-using Escaplanet.Root.Common.ValueObject;
 using R3;
 using R3.Triggers;
 using UnityEngine;
@@ -19,7 +18,7 @@ namespace Escaplanet.Ingame.Presentation.Attract
 
 
         public Vector2 Position => new(_transform.position.x, _transform.position.y);
-        public ScalarFloat Mass => new(Rigidbody2D.mass);
+        public float Mass => Rigidbody2D.mass;
 
         public IReadOnlyCollection<IReadonlyAttractSourceCore> AffectingSources => _affectingSources;
 

@@ -7,7 +7,7 @@ namespace Escaplanet.Ingame.Core.Attract
     public interface IReadonlyAttractableCore
     {
         Vector2 Position { get; }
-        ScalarFloat Mass { get; }
+        float Mass { get; }
 
         IReadOnlyCollection<IReadonlyAttractSourceCore> AffectingSources { get; }
         IReadonlyAttractSourceCore NearestSource { get; }
