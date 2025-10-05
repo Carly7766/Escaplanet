@@ -7,7 +7,6 @@ namespace Escaplanet.Ingame.Core.Attract
     {
         Vector2 Position { get; }
 
-        float GravityConstant { get; }
         float SurfaceGravity { get; }
         float Radius { get; }
 
