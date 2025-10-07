@@ -16,5 +16,8 @@ namespace Escaplanet.Root.Common
             if (angle < -180) angle += 360;
             return angle;
         }
+
+        public float Lerp(float a, float b, float t) => Mathf.Lerp(a, b, t);
+        public float Abs(float value) => Mathf.Abs(value);
     }
 }
