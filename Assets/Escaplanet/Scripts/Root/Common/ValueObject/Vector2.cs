@@ -95,6 +95,11 @@ namespace Escaplanet.Root.Common.ValueObject
             return new Vector2(X / magnitude, Y / magnitude);
         }
 
+        public static float Dot(Vector2 a, Vector2 b)
+        {
+            return a.X * b.X + a.Y * b.Y;
+        }
+
         #endregion
     }
 }
