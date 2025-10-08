@@ -24,6 +24,7 @@ namespace Escaplanet.Ingame.Composition.LifetimeScope.Player
             builder.RegisterComponent(_playerMovementCore).AsSelf();
 
             builder.Register<PlayerMovementLogic>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<PlayerJumpChargeLogic>(Lifetime.Singleton).AsImplementedInterfaces();
 
             builder.RegisterEntryPoint<PlayerEntryPoint>(Lifetime.Scoped);
         }
