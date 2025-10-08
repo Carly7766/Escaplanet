@@ -12,6 +12,10 @@ namespace Escaplanet.Ingame.Presentation.Player
 
         [SerializeField] private bool isFlayingAway;
 
+        [SerializeField] private float maxJumpPower = 1f;
+        [SerializeField] private float jumpChargeSpeed = 0.1f;
+        [SerializeField] private float jumpPowerMultiplier = 5f;
+
         private Transform _transform;
         private Rigidbody2D _rigidbody2D;
 
@@ -25,7 +29,14 @@ namespace Escaplanet.Ingame.Presentation.Player
             set => isFlayingAway = value;
         }
 
+        public float MaxJumpPower => maxJumpPower;
+        public float JumpChargeSpeed => jumpChargeSpeed;
+        public float JumpPowerMultiplier => jumpPowerMultiplier;
+        public float JumpPower { get; set; }
+        public bool IsChargingJump { get; set; }
+
         public Vector2 Position => new(_transform.position.x, _transform.position.y);
+        public Vector2 Up => new(_transform.up.x, _transform.up.y);
         public Vector2 Velocity => new(_rigidbody2D.velocity.x, _rigidbody2D.velocity.y);
 
         private void Awake()
@@ -37,6 +48,11 @@ namespace Escaplanet.Ingame.Presentation.Player
         public void Move(Vector2 velocity)
         {
             _rigidbody2D.AddForce(new UnityEngine.Vector2(velocity.X, velocity.Y));
+        }
+
+        public void Jump(Vector2 force)
+        {
+            _rigidbody2D.AddForce(new UnityEngine.Vector2(force.X, force.Y), ForceMode2D.Impulse);
         }
     }
 }
