@@ -489,8 +489,8 @@ MonoBehaviour:
   movementLerp: 1
   isFlayingAway: 0
   maxJumpPower: 1
-  jumpChargeSpeed: 0.1
-  jumpPowerMultiplier: 50
+  jumpChargeSpeed: 1
+  jumpPowerMultiplier: 500
 --- !u!114 &254716075
 MonoBehaviour:
   m_ObjectHideFlags: 0
