@@ -7,17 +7,10 @@ namespace Escaplanet.Ingame.Composition.LifetimeScope.Attract
 {
     public class RotateAttractableLifetimeScope : VContainer.Unity.LifetimeScope
     {
-        private IRotateAttractableCore _rotateAttractable;
-
-        protected override void Awake()
-        {
-            _rotateAttractable = GetComponent<IRotateAttractableCore>();
-            base.Awake();
-        }
-
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterComponent(_rotateAttractable).AsSelf().As<IAttractableCore>();
+            var rotateAttractable = GetComponent<IRotateAttractableCore>();
+            builder.RegisterComponent(rotateAttractable).AsSelf().As<IAttractableCore>();
 
             builder.RegisterEntryPoint<AttractableEntryPoint>(Lifetime.Scoped);
             builder.RegisterEntryPoint<RotateAttractableEntryPoint>(Lifetime.Scoped);

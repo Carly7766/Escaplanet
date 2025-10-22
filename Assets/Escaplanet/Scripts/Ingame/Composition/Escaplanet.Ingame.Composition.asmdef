@@ -2,12 +2,14 @@
     "name": "Escaplanet.Ingame.Composition",
     "rootNamespace": "",
     "references": [
+        "GUID:77221876cc6b8244180b96e320b1bcd4",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+        "GUID:432e2d5fe5f1e87408eb1e44ab4f046d",
         "GUID:144973f1ce27f68429d3f5c2529d4eef",
         "GUID:5feec6ce226b35342af9382d25ad407e",
         "GUID:c8e075f18aef5a649be02470116e4aad",
-        "GUID:428a530f7310f7940a01934e2aecd7f9",
-        "GUID:77221876cc6b8244180b96e320b1bcd4",
-        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc"
+        "GUID:428a530f7310f7940a01934e2aecd7f9"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

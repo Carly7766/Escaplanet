@@ -44,12 +44,10 @@ namespace Escaplanet.Ingame.Presentation.Player
                 if (context.started)
                 {
                     _onJumpInputDown.OnNext(Unit.Default);
-                    Debug.Log("Jump Input Down");
                 }
                 else if (context.canceled)
                 {
                     _onJumpInputUp.OnNext(Unit.Default);
-                    Debug.Log("Jump Input Up");
                 }
             }
         }
