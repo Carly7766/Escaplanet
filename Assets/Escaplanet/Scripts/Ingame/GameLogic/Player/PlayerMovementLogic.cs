@@ -46,5 +46,11 @@ namespace Escaplanet.Ingame.GameLogic.Player
 
             playerMovement.Move(perpendicularNormalized * movement);
         }
+
+        public void OnGround(IPlayerMovementCore playerMovement)
+        {
+            playerMovement.IsFlayingAway = false;
+            playerMovement.IsJumping = false;
+        }
     }
 }

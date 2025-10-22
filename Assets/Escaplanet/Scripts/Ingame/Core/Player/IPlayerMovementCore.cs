@@ -1,4 +1,5 @@
 ﻿using Escaplanet.Root.Common.ValueObject;
+using R3;
 
 namespace Escaplanet.Ingame.Core.Player
 {
@@ -9,6 +10,7 @@ namespace Escaplanet.Ingame.Core.Player
         float MovementLerpAmount { get; }
 
         bool IsFlayingAway { get; set; }
+        bool IsJumping { get; set; }
 
         float MaxJumpPower { get; }
         float JumpChargeSpeed { get; }
@@ -19,6 +21,8 @@ namespace Escaplanet.Ingame.Core.Player
         Vector2 Position { get; }
         Vector2 Up { get; }
         Vector2 Velocity { get; }
+
+        Observable<Unit> OnGrounded { get; }
 
         void Move(Vector2 velocity);
         void Jump(Vector2 force);
