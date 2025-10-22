@@ -2,11 +2,12 @@
     "name": "Escaplanet.Ingame.EntryPoint",
     "rootNamespace": "",
     "references": [
-        "GUID:144973f1ce27f68429d3f5c2529d4eef",
-        "GUID:5feec6ce226b35342af9382d25ad407e",
-        "GUID:432e2d5fe5f1e87408eb1e44ab4f046d",
         "GUID:77221876cc6b8244180b96e320b1bcd4",
-        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc"
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+        "GUID:432e2d5fe5f1e87408eb1e44ab4f046d",
+        "GUID:144973f1ce27f68429d3f5c2529d4eef",
+        "GUID:5feec6ce226b35342af9382d25ad407e"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
