@@ -19,16 +19,23 @@ namespace Escaplanet.Ingame.GameLogic.Player
 
         public void StartJumpCharge()
         {
+            if (_playerMovementCore.IsJumping || _playerMovementCore.IsFlayingAway) return;
             _playerMovementCore.IsChargingJump = true;
         }
 
         public void Jump()
         {
+            if (_playerMovementCore.IsJumping || _playerMovementCore.IsFlayingAway)
+            {
+                ResetJump();
+                return;
+            }
+
             _playerMovementCore.Jump(_playerMovementCore.Up *
                                      _playerMovementCore.JumpPower *
                                      _playerMovementCore.JumpPowerMultiplier);
-            _playerMovementCore.IsChargingJump = false;
-            _playerMovementCore.JumpPower = 0;
+            _playerMovementCore.IsJumping = true;
+            ResetJump();
         }
 
         public void UpdateJumpCharge()
@@ -42,6 +49,12 @@ namespace Escaplanet.Ingame.GameLogic.Player
                     _playerMovementCore.JumpPower = _playerMovementCore.MaxJumpPower;
                 }
             }
+        }
+
+        public void ResetJump()
+        {
+            _playerMovementCore.IsChargingJump = false;
+            _playerMovementCore.JumpPower = 0;
         }
     }
 }

@@ -7,5 +7,7 @@ namespace Escaplanet.Ingame.GameLogic.Player
     {
         public void UpdateMovement(IAttractableCore attractable, IPlayerMovementCore playerMovement,
             IPlayerInputCore playerInput);
+
+        public void OnGround(IPlayerMovementCore playerMovement);
     }
 }

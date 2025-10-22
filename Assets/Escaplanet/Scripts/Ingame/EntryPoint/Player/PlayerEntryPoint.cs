@@ -34,6 +34,9 @@ namespace Escaplanet.Ingame.EntryPoint.Player
                 .AddTo(_disposables);
             _playerInputCore.OnJumpInputUp.Subscribe(_ => _playerJumpChargeLogic.Jump())
                 .AddTo(_disposables);
+
+            _playerMovementCore.OnGrounded.Subscribe(_ => _playerMovementLogic.OnGround(_playerMovementCore))
+                .AddTo(_disposables);
         }
 
         public void Tick()
