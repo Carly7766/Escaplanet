@@ -1,5 +1,5 @@
-﻿using System;
-using Escaplanet.Ingame.Core.Player;
+﻿using Escaplanet.Ingame.Core.Player;
+using Escaplanet.Root.Common.ValueObject;
 using R3;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,12 +11,8 @@ namespace Escaplanet.Ingame.Presentation.Player
         private PlayerInput _playerInput;
 
         public float MoveInput { get; private set; }
-
-        private readonly Subject<Unit> _onJumpInputDown = new();
-        private readonly Subject<Unit> _onJumpInputUp = new();
-
-        public Observable<Unit> OnJumpInputDown => _onJumpInputDown;
-        public Observable<Unit> OnJumpInputUp => _onJumpInputUp;
+        private Subject<InputState> _jumpInputSubject = new();
+        public Observable<InputState> OnJumpInput => _jumpInputSubject;
 
         private void Awake()
         {
@@ -37,17 +33,21 @@ namespace Escaplanet.Ingame.Presentation.Player
 
         private void OnInputAction(InputAction.CallbackContext context)
         {
-            if (context.action.name == "Move")
+            if (context.action.name == "Movement")
                 MoveInput = context.ReadValue<float>();
             if (context.action.name == "Jump")
             {
                 if (context.started)
                 {
-                    _onJumpInputDown.OnNext(Unit.Default);
+                    _jumpInputSubject.OnNext(InputState.Down);
+                }
+                else if (context.performed)
+                {
+                    _jumpInputSubject.OnNext(InputState.Hold);
                 }
                 else if (context.canceled)
                 {
-                    _onJumpInputUp.OnNext(Unit.Default);
+                    _jumpInputSubject.OnNext(InputState.Up);
                 }
             }
         }

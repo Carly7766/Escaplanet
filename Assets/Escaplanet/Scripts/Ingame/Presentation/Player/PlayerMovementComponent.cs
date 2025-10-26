@@ -15,11 +15,12 @@ namespace Escaplanet.Ingame.Presentation.Player
 
         [SerializeField] private bool isFlayingAway;
         [SerializeField] private bool isJumping;
-        
+
         [SerializeField] private float jumpPower;
         [SerializeField] private float maxJumpPower = 1f;
         [SerializeField] private float jumpChargeSpeed = 0.1f;
         [SerializeField] private float jumpPowerMultiplier = 5f;
+        [SerializeField] private float chargeJumpPowerMultiplier = 10f;
 
         private Transform _transform;
         private Rigidbody2D _rigidbody2D;
@@ -44,13 +45,17 @@ namespace Escaplanet.Ingame.Presentation.Player
         public float MaxJumpPower => maxJumpPower;
         public float JumpChargeSpeed => jumpChargeSpeed;
         public float JumpPowerMultiplier => jumpPowerMultiplier;
+        public float ChargeJumpPowerMultiplier => chargeJumpPowerMultiplier;
+
         public float JumpPower
         {
             get => jumpPower;
             set => jumpPower = value;
         }
 
-        public bool IsChargingJump { get; set; }
+        public bool IsJumpInputHeld { get; set; }
+
+        public bool IsJumpCharging { get; set; }
 
         public Vector2 Position => new(_transform.position.x, _transform.position.y);
         public Vector2 Up => new(_transform.up.x, _transform.up.y);
