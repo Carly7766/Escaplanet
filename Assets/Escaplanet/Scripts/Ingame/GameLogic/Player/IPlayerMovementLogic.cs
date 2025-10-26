@@ -1,13 +1,7 @@
-﻿using Escaplanet.Ingame.Core.Attract;
-using Escaplanet.Ingame.Core.Player;
-
-namespace Escaplanet.Ingame.GameLogic.Player
+﻿namespace Escaplanet.Ingame.GameLogic.Player
 {
     public interface IPlayerMovementLogic
     {
-        public void UpdateMovement(IAttractableCore attractable, IPlayerMovementCore playerMovement,
-            IPlayerInputCore playerInput);
-
-        public void OnGround(IPlayerMovementCore playerMovement);
+        public void UpdateMovement();
     }
 }

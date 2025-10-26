@@ -13,40 +13,43 @@ namespace Escaplanet.Ingame.EntryPoint.Player
         private IPlayerMovementCore _playerMovementCore;
 
         private IPlayerMovementLogic _playerMovementLogic;
-        private IPlayerJumpChargeLogic _playerJumpChargeLogic;
+        private IPlayerJumpLogic _playerJumpLogic;
+        private PlayerGroundDetectionLogic _playerGroundDetectionLogic;
 
         private CompositeDisposable _disposables = new();
 
         public PlayerEntryPoint(IAttractableCore playerAttractableCore, IPlayerInputCore playerInputCore,
             IPlayerMovementCore playerMovementCore, IPlayerMovementLogic playerMovementLogic,
-            IPlayerJumpChargeLogic playerJumpChargeLogic)
+            IPlayerJumpLogic playerJumpLogic, PlayerGroundDetectionLogic playerGroundDetectionLogic)
         {
             _playerAttractableCore = playerAttractableCore;
             _playerInputCore = playerInputCore;
             _playerMovementCore = playerMovementCore;
             _playerMovementLogic = playerMovementLogic;
-            _playerJumpChargeLogic = playerJumpChargeLogic;
+            _playerJumpLogic = playerJumpLogic;
+            _playerGroundDetectionLogic = playerGroundDetectionLogic;
         }
 
         public void Start()
         {
-            _playerInputCore.OnJumpInputDown.Subscribe(_ => _playerJumpChargeLogic.StartJumpCharge())
-                .AddTo(_disposables);
-            _playerInputCore.OnJumpInputUp.Subscribe(_ => _playerJumpChargeLogic.Jump())
+            _playerMovementCore.OnGrounded
+                .Subscribe(_ => _playerGroundDetectionLogic.OnGroundDetected())
                 .AddTo(_disposables);
 
-            _playerMovementCore.OnGrounded.Subscribe(_ => _playerMovementLogic.OnGround(_playerMovementCore))
+            _playerInputCore.OnJumpInput
+                .Subscribe(inputState => _playerJumpLogic.OnJumpInput(inputState))
                 .AddTo(_disposables);
         }
 
         public void Tick()
         {
-            _playerJumpChargeLogic.UpdateJumpCharge();
+            _playerJumpLogic.UpdateJump();
         }
 
         public void FixedTick()
         {
-            _playerMovementLogic.UpdateMovement(_playerAttractableCore, _playerMovementCore, _playerInputCore);
+            _playerMovementLogic.UpdateMovement();
+            _playerJumpLogic.UpdateJump();
         }
     }
 }
