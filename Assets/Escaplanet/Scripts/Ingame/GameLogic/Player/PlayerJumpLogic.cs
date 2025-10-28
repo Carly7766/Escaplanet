@@ -18,7 +18,7 @@ namespace Escaplanet.Ingame.GameLogic.Player
             switch (inputState)
             {
                 case InputState.Down:
-                    if (!playerMovement.IsJumping || !playerMovement.IsFlayingAway)
+                    if (!playerMovement.IsJumping && !playerMovement.IsFlayingAway)
                     {
                         playerMovement.IsJumpInputHeld = true;
                     }
@@ -32,6 +32,7 @@ namespace Escaplanet.Ingame.GameLogic.Player
 
                     break;
                 case InputState.Up:
+                    if (playerMovement.IsJumping || !playerMovement.IsJumpInputHeld) break;
                     if (playerMovement.IsJumpCharging)
                     {
                         playerMovement.Jump(playerMovement.Up *
