@@ -1,6 +1,5 @@
 ﻿using Escaplanet.Ingame.Core.Attract;
 using Escaplanet.Ingame.GameLogic.Attract;
-using UnityEngine;
 using VContainer.Unity;
 
 namespace Escaplanet.Ingame.EntryPoint.Attract

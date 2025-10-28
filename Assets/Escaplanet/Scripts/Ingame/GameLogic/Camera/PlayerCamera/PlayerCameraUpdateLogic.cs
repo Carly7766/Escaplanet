@@ -5,11 +5,11 @@ namespace Escaplanet.Ingame.GameLogic.Camera.PlayerCamera
 {
     public class PlayerCameraUpdateLogic : IPlayerCameraUpdateLogic
     {
-        public void UpdatePlayerCamera(IPlayerCameraCore cameraCore, IPlayerMovementCore playerMovementCore)
+        public void UpdatePlayerCamera(IPlayerCameraCore playerCamera, IPlayerMovementCore playerMovement)
         {
-            var cameraState = cameraCore.State;
-            cameraState.Position = playerMovementCore.Position;
-            cameraCore.State = cameraState;
+            var cameraState = playerCamera.State;
+            cameraState.Position = playerMovement.Position;
+            playerCamera.State = cameraState;
         }
     }
 }

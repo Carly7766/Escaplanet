@@ -7,21 +7,21 @@ namespace Escaplanet.Ingame.EntryPoint.Camera
 {
     public class PlayerCameraEntryPoint : ILateTickable
     {
-        private IPlayerCameraCore _playerCameraCore;
-        private IPlayerMovementCore _playerMovementCore;
+        private IPlayerCameraCore _playerCamera;
+        private IPlayerMovementCore _playerMovement;
         private IPlayerCameraUpdateLogic _playerCameraUpdateLogic;
 
-        public PlayerCameraEntryPoint(IPlayerCameraCore playerCameraCore, IPlayerMovementCore playerMovementCore,
+        public PlayerCameraEntryPoint(IPlayerCameraCore playerCamera, IPlayerMovementCore playerMovement,
             IPlayerCameraUpdateLogic playerCameraUpdateLogic)
         {
-            _playerCameraCore = playerCameraCore;
-            _playerMovementCore = playerMovementCore;
+            _playerCamera = playerCamera;
+            _playerMovement = playerMovement;
             _playerCameraUpdateLogic = playerCameraUpdateLogic;
         }
 
         public void LateTick()
         {
-            _playerCameraUpdateLogic.UpdatePlayerCamera(_playerCameraCore, _playerMovementCore);
+            _playerCameraUpdateLogic.UpdatePlayerCamera(_playerCamera, _playerMovement);
         }
     }
 }
