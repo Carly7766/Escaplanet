@@ -492,7 +492,7 @@ MonoBehaviour:
   jumpPower: 0
   maxJumpPower: 1
   jumpChargeSpeed: 1
-  jumpPowerMultiplier: 200
+  jumpPowerMultiplier: 300
   chargeJumpPowerMultiplier: 800
 --- !u!114 &254716075
 MonoBehaviour:
