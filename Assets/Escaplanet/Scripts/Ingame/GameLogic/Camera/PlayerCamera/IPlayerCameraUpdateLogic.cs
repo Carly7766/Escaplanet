@@ -5,6 +5,6 @@ namespace Escaplanet.Ingame.GameLogic.Camera.PlayerCamera
 {
     public interface IPlayerCameraUpdateLogic
     {
-        void UpdatePlayerCamera(IPlayerCameraCore cameraCore, IPlayerMovementCore playerMovementCore);
+        void UpdatePlayerCamera(IPlayerCameraCore playerCamera, IPlayerMovementCore playerMovement);
     }
 }

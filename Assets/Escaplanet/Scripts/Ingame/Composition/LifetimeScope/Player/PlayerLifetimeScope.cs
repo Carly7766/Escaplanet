@@ -11,21 +11,13 @@ namespace Escaplanet.Ingame.Composition.LifetimeScope.Player
         private IPlayerInputCore _playerInputCore;
         private IPlayerMovementCore _playerMovementCore;
 
-        protected override void Awake()
+        protected override void Configure(IContainerBuilder builder)
         {
             _playerInputCore = GetComponent<IPlayerInputCore>();
             _playerMovementCore = GetComponent<IPlayerMovementCore>();
-            base.Awake();
-        }
 
-        protected override void Configure(IContainerBuilder builder)
-        {
             builder.RegisterComponent(_playerInputCore).AsSelf();
             builder.RegisterComponent(_playerMovementCore).AsSelf();
-
-            builder.Register<PlayerMovementLogic>(Lifetime.Singleton).AsImplementedInterfaces();
-            builder.Register<PlayerJumpLogic>(Lifetime.Singleton).AsImplementedInterfaces();
-            builder.Register<PlayerGroundDetectionLogic>(Lifetime.Singleton).AsSelf();
 
             builder.RegisterEntryPoint<PlayerEntryPoint>(Lifetime.Scoped);
         }

@@ -1,6 +1,6 @@
 ﻿namespace Escaplanet.Ingame.Core.Camera
 {
-    public interface ICameraBrainCore
+    public interface IMainCameraCore
     {
         CameraState CurrentState { get; set; }
 

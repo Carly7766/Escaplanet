@@ -4,17 +4,10 @@ namespace Escaplanet.Ingame.GameLogic.Player
 {
     public class PlayerGroundDetectionLogic
     {
-        IPlayerMovementCore _playerMovementCore;
-
-        public PlayerGroundDetectionLogic(IPlayerMovementCore playerMovementCore)
+        public void OnGroundDetected(IPlayerMovementCore playerMovementCore)
         {
-            _playerMovementCore = playerMovementCore;
-        }
-
-        public void OnGroundDetected()
-        {
-            _playerMovementCore.IsFlayingAway = false;
-            _playerMovementCore.IsJumping = false;
+            playerMovementCore.IsFlayingAway = false;
+            playerMovementCore.IsJumping = false;
         }
     }
 }

@@ -4,7 +4,7 @@ using Vector2 = Escaplanet.Root.Common.ValueObject.Vector2;
 
 namespace Escaplanet.Ingame.Presentation.Camera
 {
-    public class CameraBrainComponent : MonoBehaviour, ICameraBrainCore
+    public class MainCameraComponent : MonoBehaviour, IMainCameraCore
     {
         #region MonoBehaviour Fields
 

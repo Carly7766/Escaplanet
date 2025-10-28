@@ -33,23 +33,22 @@ namespace Escaplanet.Ingame.EntryPoint.Player
         public void Start()
         {
             _playerMovementCore.OnGrounded
-                .Subscribe(_ => _playerGroundDetectionLogic.OnGroundDetected())
+                .Subscribe(_ => _playerGroundDetectionLogic.OnGroundDetected(_playerMovementCore))
                 .AddTo(_disposables);
 
             _playerInputCore.OnJumpInput
-                .Subscribe(inputState => _playerJumpLogic.OnJumpInput(inputState))
+                .Subscribe(inputState => _playerJumpLogic.OnJumpInput(_playerMovementCore, inputState))
                 .AddTo(_disposables);
         }
 
         public void Tick()
         {
-            _playerJumpLogic.UpdateJump();
+            _playerJumpLogic.UpdateJump(_playerMovementCore);
         }
 
         public void FixedTick()
         {
-            _playerMovementLogic.UpdateMovement();
-            _playerJumpLogic.UpdateJump();
+            _playerMovementLogic.UpdateMovement(_playerAttractableCore, _playerMovementCore, _playerInputCore);
         }
     }
 }

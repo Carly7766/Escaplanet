@@ -3,36 +3,36 @@ using Escaplanet.Root.Common;
 
 namespace Escaplanet.Ingame.GameLogic.Camera
 {
-    public class CameraUpdateLogic : ICameraUpdateLogic
+    public class MainCameraUpdateLogic : IMainCameraUpdateLogic
     {
         private IGlobalValuePort _globalValuePort;
 
-        public CameraUpdateLogic(IGlobalValuePort globalValuePort)
+        public MainCameraUpdateLogic(IGlobalValuePort globalValuePort)
         {
             _globalValuePort = globalValuePort;
         }
 
-        public void LateUpdate(ICameraBrainCore cameraBrain)
+        public void LateUpdate(IMainCameraCore mainCamera)
         {
-            if (cameraBrain.ActiveCamera == null) return;
+            if (mainCamera.ActiveCamera == null) return;
 
             // cameraBrainCore.CurrentState = cameraBrainCore.ActiveCamera.State;
 
             CameraState activeState;
 
-            if (cameraBrain.PreviousCamera != null)
+            if (mainCamera.PreviousCamera != null)
             {
                 activeState = CameraState.Lerp(
-                    cameraBrain.PreviousCamera.State,
-                    cameraBrain.ActiveCamera.State,
+                    mainCamera.PreviousCamera.State,
+                    mainCamera.ActiveCamera.State,
                     _globalValuePort.DeltaTime);
             }
             else
             {
-                activeState = cameraBrain.ActiveCamera.State;
+                activeState = mainCamera.ActiveCamera.State;
             }
 
-            cameraBrain.ApplyCameraState(activeState);
+            mainCamera.ApplyCameraState(activeState);
         }
     }
 }

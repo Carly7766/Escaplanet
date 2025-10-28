@@ -6,72 +6,70 @@ namespace Escaplanet.Ingame.GameLogic.Player
 {
     public class PlayerJumpLogic : IPlayerJumpLogic
     {
-        private IPlayerMovementCore _playerMovementCore;
         private IGlobalValuePort _globalValuePort;
 
-        public PlayerJumpLogic(IPlayerMovementCore playerMovementCore, IGlobalValuePort globalValuePort)
+        public PlayerJumpLogic(IGlobalValuePort globalValuePort)
         {
-            _playerMovementCore = playerMovementCore;
             _globalValuePort = globalValuePort;
         }
 
-        public void OnJumpInput(InputState inputState)
+        public void OnJumpInput(IPlayerMovementCore playerMovement, InputState inputState)
         {
             switch (inputState)
             {
                 case InputState.Down:
-                    if (!_playerMovementCore.IsJumping || !_playerMovementCore.IsFlayingAway)
+                    if (!playerMovement.IsJumping || !playerMovement.IsFlayingAway)
                     {
-                        _playerMovementCore.IsJumpInputHeld = true;
+                        playerMovement.IsJumpInputHeld = true;
                     }
 
                     break;
                 case InputState.Hold:
-                    if (_playerMovementCore.IsJumpInputHeld)
+                    if (playerMovement.IsJumpInputHeld)
                     {
-                        _playerMovementCore.IsJumpCharging = true;
+                        playerMovement.IsJumpCharging = true;
                     }
 
                     break;
                 case InputState.Up:
-                    if (_playerMovementCore.IsJumpCharging)
+                    if (playerMovement.IsJumpCharging)
                     {
-                        _playerMovementCore.Jump(_playerMovementCore.Up *
-                                                 _playerMovementCore.JumpPower *
-                                                 _playerMovementCore.ChargeJumpPowerMultiplier);
-                        ResetJumpCharge();
+                        playerMovement.Jump(playerMovement.Up *
+                                            playerMovement.JumpPower *
+                                            playerMovement.ChargeJumpPowerMultiplier);
+                        ResetJumpCharge(playerMovement);
                     }
                     else
                     {
-                        _playerMovementCore.Jump(_playerMovementCore.Up *
-                                                 _playerMovementCore.MaxJumpPower *
-                                                 _playerMovementCore.JumpPowerMultiplier);
+                        playerMovement.Jump(playerMovement.Up *
+                                            playerMovement.MaxJumpPower *
+                                            playerMovement.JumpPowerMultiplier);
                     }
 
-                    _playerMovementCore.IsJumpInputHeld = false;
-                    _playerMovementCore.IsJumping = true;
+                    playerMovement.IsJumpInputHeld = false;
+                    playerMovement.IsJumping = true;
 
                     break;
             }
         }
 
-        public void UpdateJump()
+        public void UpdateJump(IPlayerMovementCore playerMovement)
         {
-            if (_playerMovementCore.IsJumpCharging)
+            if (playerMovement.IsJumpCharging)
             {
-                _playerMovementCore.JumpPower += _playerMovementCore.JumpChargeSpeed * _globalValuePort.DeltaTime;
+                playerMovement.JumpPower += playerMovement.JumpChargeSpeed * _globalValuePort.DeltaTime;
 
-                if (_playerMovementCore.JumpPower > _playerMovementCore.MaxJumpPower)
+                if (playerMovement.JumpPower > playerMovement.MaxJumpPower)
                 {
-                    _playerMovementCore.JumpPower = _playerMovementCore.MaxJumpPower;
+                    playerMovement.JumpPower = playerMovement.MaxJumpPower;
                 }
             }
         }
 
-        public void ResetJumpCharge()
+        public void ResetJumpCharge(IPlayerMovementCore playerMovementCore)
         {
-            _playerMovementCore.IsJumpCharging = false;
-            _playerMovementCore.JumpPower = 0;
+            playerMovementCore.IsJumpCharging = false;
+            playerMovementCore.JumpPower = 0;
         }
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Escaplanet.Ingame.GameLogic.Camera
 {
-    public interface ICameraUpdateLogic
+    public interface IMainCameraUpdateLogic
     {
-        void LateUpdate(ICameraBrainCore cameraBrain);
+        void LateUpdate(IMainCameraCore mainCamera);
     }
 }
