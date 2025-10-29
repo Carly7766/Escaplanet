@@ -1,4 +1,5 @@
-﻿using Escaplanet.Ingame.Core.Attract;
+﻿using System;
+using Escaplanet.Ingame.Core.Attract;
 using Escaplanet.Ingame.Core.Player;
 using Escaplanet.Ingame.GameLogic.Player;
 using R3;
@@ -6,7 +7,7 @@ using VContainer.Unity;
 
 namespace Escaplanet.Ingame.EntryPoint.Player
 {
-    public class PlayerEntryPoint : IStartable, ITickable, IFixedTickable
+    public class PlayerEntryPoint : IStartable, ITickable, IFixedTickable, IDisposable
     {
         private IAttractableCore _playerAttractableCore;
         private IPlayerInputCore _playerInputCore;
@@ -49,6 +50,11 @@ namespace Escaplanet.Ingame.EntryPoint.Player
         public void FixedTick()
         {
             _playerMovementLogic.UpdateMovement(_playerAttractableCore, _playerMovementCore, _playerInputCore);
+        }
+
+        public void Dispose()
+        {
+            _disposables.Dispose();
         }
     }
 }
