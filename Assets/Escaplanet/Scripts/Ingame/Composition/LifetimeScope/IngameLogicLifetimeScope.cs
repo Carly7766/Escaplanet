@@ -22,7 +22,7 @@ namespace Escaplanet.Ingame.Composition.LifetimeScope
             builder.Register<PlayerJumpLogic>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<PlayerGroundDetectionLogic>(Lifetime.Singleton).AsSelf();
 
-            // Camera Logic
+            // MainCamera Logic
             builder.Register<MainCameraUpdateLogic>(Lifetime.Singleton).As<IMainCameraUpdateLogic>();
             builder.Register<MainCameraSwitchLogic>(Lifetime.Singleton).As<IMainCameraSwitchLogic>();
         }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Escaplanet.Ingame.Core.Attract;
 using Escaplanet.Ingame.GameLogic.Attract;
 using R3;
