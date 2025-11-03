@@ -6,7 +6,7 @@ namespace Escaplanet.Ingame.GameLogic.Player
     {
         public void OnGroundDetected(IPlayerMovementCore playerMovementCore)
         {
-            playerMovementCore.IsFlayingAway = false;
+            playerMovementCore.IsBlownAway = false;
             playerMovementCore.IsJumping = false;
         }
     }

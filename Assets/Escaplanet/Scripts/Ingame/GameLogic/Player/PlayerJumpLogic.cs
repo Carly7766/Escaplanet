@@ -7,6 +7,7 @@ namespace Escaplanet.Ingame.GameLogic.Player
     public class PlayerJumpLogic : IPlayerJumpLogic
     {
         private IGlobalValuePort _globalValuePort;
+        private IFloatMathPort _floatMathPort;
 
         public PlayerJumpLogic(IGlobalValuePort globalValuePort)
         {
@@ -18,7 +19,7 @@ namespace Escaplanet.Ingame.GameLogic.Player
             switch (inputState)
             {
                 case InputState.Down:
-                    if (!playerMovement.IsJumping && !playerMovement.IsFlayingAway)
+                    if (!playerMovement.IsJumping && !playerMovement.IsBlownAway)
                     {
                         playerMovement.IsJumpInputHeld = true;
                     }
@@ -36,15 +37,15 @@ namespace Escaplanet.Ingame.GameLogic.Player
                     if (playerMovement.IsJumpCharging)
                     {
                         playerMovement.Jump(playerMovement.Up *
-                                            playerMovement.JumpPower *
-                                            playerMovement.ChargeJumpPowerMultiplier);
+                                            playerMovement.JumpCharge *
+                                            playerMovement.ChargedJumpMultiplier);
                         ResetJumpCharge(playerMovement);
                     }
                     else
                     {
                         playerMovement.Jump(playerMovement.Up *
                                             playerMovement.MaxJumpPower *
-                                            playerMovement.JumpPowerMultiplier);
+                                            playerMovement.UnchargedJumpMultiplier);
                     }
 
                     playerMovement.IsJumpInputHeld = false;
@@ -54,23 +55,27 @@ namespace Escaplanet.Ingame.GameLogic.Player
             }
         }
 
-        public void UpdateJump(IPlayerMovementCore playerMovement)
+        public void UpdateJumpCharge(IPlayerMovementCore playerMovement)
         {
             if (playerMovement.IsJumpCharging)
             {
-                playerMovement.JumpPower += playerMovement.JumpChargeSpeed * _globalValuePort.DeltaTime;
+                playerMovement.JumpCharge += playerMovement.JumpPowerChargeSpeed * _globalValuePort.DeltaTime;
 
-                if (playerMovement.JumpPower > playerMovement.MaxJumpPower)
+                if (playerMovement.JumpCharge > playerMovement.MaxJumpPower)
                 {
-                    playerMovement.JumpPower = playerMovement.MaxJumpPower;
+                    playerMovement.JumpCharge = playerMovement.MaxJumpPower;
                 }
             }
+        }
+
+        public void FixedUpdateJump(IPlayerMovementCore playerMovement)
+        {
         }
 
         public void ResetJumpCharge(IPlayerMovementCore playerMovementCore)
         {
             playerMovementCore.IsJumpCharging = false;
-            playerMovementCore.JumpPower = 0;
+            playerMovementCore.JumpCharge = 0;
         }
     }
 }

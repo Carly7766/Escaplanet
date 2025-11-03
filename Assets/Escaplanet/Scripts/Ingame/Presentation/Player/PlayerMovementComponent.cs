@@ -26,11 +26,11 @@ namespace Escaplanet.Ingame.Presentation.Player
         private Rigidbody2D _rigidbody2D;
         private Collider2D _collider2D;
 
-        public float MoveSpeed => moveSpeed;
-        public float Acceleration => acceleration;
-        public float MovementLerpAmount => movementLerp;
+        public float MaxMoveSpeed => moveSpeed;
+        public float MoveAcceleration => acceleration;
+        public float MovementLerpFactor => movementLerp;
 
-        public bool IsFlayingAway
+        public bool IsBlownAway
         {
             get => isFlayingAway;
             set => isFlayingAway = value;
@@ -43,11 +43,11 @@ namespace Escaplanet.Ingame.Presentation.Player
         }
 
         public float MaxJumpPower => maxJumpPower;
-        public float JumpChargeSpeed => jumpChargeSpeed;
-        public float JumpPowerMultiplier => jumpPowerMultiplier;
-        public float ChargeJumpPowerMultiplier => chargeJumpPowerMultiplier;
+        public float JumpPowerChargeSpeed => jumpChargeSpeed;
+        public float UnchargedJumpMultiplier => jumpPowerMultiplier;
+        public float ChargedJumpMultiplier => chargeJumpPowerMultiplier;
 
-        public float JumpPower
+        public float JumpCharge
         {
             get => jumpPower;
             set => jumpPower = value;
