@@ -19,5 +19,7 @@ namespace Escaplanet.Root.Common
 
         public float Lerp(float a, float b, float t) => Mathf.Lerp(a, b, t);
         public float Abs(float value) => Mathf.Abs(value);
+        public float Min(float a, float b) => Mathf.Min(a, b);
+        public float Max(float a, float b) => Mathf.Max(a, b);
     }
 }

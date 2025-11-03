@@ -44,12 +44,13 @@ namespace Escaplanet.Ingame.EntryPoint.Player
 
         public void Tick()
         {
-            _playerJumpLogic.UpdateJump(_playerMovementCore);
+            _playerJumpLogic.UpdateJumpCharge(_playerMovementCore);
         }
 
         public void FixedTick()
         {
             _playerMovementLogic.UpdateMovement(_playerAttractableCore, _playerMovementCore, _playerInputCore);
+            _playerJumpLogic.FixedUpdateJump(_playerMovementCore);
         }
 
         public void Dispose()

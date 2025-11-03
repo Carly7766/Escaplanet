@@ -20,7 +20,7 @@ namespace Escaplanet.Ingame.GameLogic.Player
             IPlayerInputCore playerInput)
         {
             if (attractable.NearestSource == null) return;
-            if (playerMovement.IsFlayingAway) return;
+            if (playerMovement.IsBlownAway) return;
 
             var diff = playerMovement.Position - attractable.NearestSource.Position;
 
@@ -29,16 +29,16 @@ namespace Escaplanet.Ingame.GameLogic.Player
 
             var perpendicularSpeed = Vector2.Dot(playerMovement.Velocity, perpendicularNormalized);
 
-            if (_floatMathPort.Abs(perpendicularSpeed) > playerMovement.MoveSpeed)
+            if (_floatMathPort.Abs(perpendicularSpeed) > playerMovement.MaxMoveSpeed)
             {
-                playerMovement.IsFlayingAway = true;
+                playerMovement.IsBlownAway = true;
                 return;
             }
 
-            var targetSpeed = playerInput.MoveInput * playerMovement.MoveSpeed;
-            targetSpeed = _floatMathPort.Lerp(perpendicularSpeed, targetSpeed, playerMovement.MovementLerpAmount);
+            var targetSpeed = playerInput.MoveInput * playerMovement.MaxMoveSpeed;
+            targetSpeed = _floatMathPort.Lerp(perpendicularSpeed, targetSpeed, playerMovement.MovementLerpFactor);
 
-            var accelRate = playerMovement.Acceleration / playerMovement.MoveSpeed *
+            var accelRate = playerMovement.MoveAcceleration / playerMovement.MaxMoveSpeed *
                             (1f / _globalValuePort.FixedDeltaTime);
 
             var speedDif = targetSpeed - perpendicularSpeed;

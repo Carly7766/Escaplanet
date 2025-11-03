@@ -9,5 +9,7 @@
         float NormalizedAngle180(float angle);
         float Lerp(float a, float b, float t);
         float Abs(float value);
+        float Min(float a, float b);
+        float Max(float a, float b);
     }
 }

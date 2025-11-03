@@ -6,6 +6,7 @@ namespace Escaplanet.Ingame.GameLogic.Player
     public interface IPlayerJumpLogic
     {
         void OnJumpInput(IPlayerMovementCore playerMovement, InputState inputState);
-        void UpdateJump(IPlayerMovementCore playerMovement);
+        void UpdateJumpCharge(IPlayerMovementCore playerMovement);
+        void FixedUpdateJump(IPlayerMovementCore playerMovement);
     }
 }
