@@ -1,6 +1,8 @@
-﻿using Escaplanet.Ingame.Core.Player;
+﻿using Escaplanet.Ingame.Core.GameOver;
+using Escaplanet.Ingame.Core.Player;
 using Escaplanet.Ingame.EntryPoint.Player;
-using Escaplanet.Ingame.GameLogic.Player;
+using Escaplanet.Ingame.Presentation.UI;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -8,16 +10,14 @@ namespace Escaplanet.Ingame.Composition.LifetimeScope.Player
 {
     public class PlayerLifetimeScope : VContainer.Unity.LifetimeScope
     {
-        private IPlayerInputCore _playerInputCore;
-        private IPlayerMovementCore _playerMovementCore;
+        [SerializeField] private CountdownTextComponent countdownTextComponent;
 
         protected override void Configure(IContainerBuilder builder)
         {
-            _playerInputCore = GetComponent<IPlayerInputCore>();
-            _playerMovementCore = GetComponent<IPlayerMovementCore>();
-
-            builder.RegisterComponent(_playerInputCore).AsSelf();
-            builder.RegisterComponent(_playerMovementCore).AsSelf();
+            builder.RegisterComponent(GetComponent<IPlayerInputCore>()).AsSelf();
+            builder.RegisterComponent(GetComponent<IPlayerMovementCore>()).AsSelf();
+            builder.RegisterComponent(GetComponent<IGameOverDetectableCore>()).AsSelf();
+            builder.RegisterComponent(countdownTextComponent).AsImplementedInterfaces();
 
             builder.RegisterEntryPoint<PlayerEntryPoint>(Lifetime.Scoped);
         }
