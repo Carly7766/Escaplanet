@@ -14,6 +14,9 @@ namespace Escaplanet.Ingame.Presentation.Player
         private Subject<InputState> _jumpInputSubject = new();
         public Observable<InputState> OnJumpInput => _jumpInputSubject;
 
+        private Subject<InputState> _switchCameraInputSubject = new();
+        public Observable<InputState> OnSwitchCameraInput => _switchCameraInputSubject;
+
         private void Awake()
         {
             _playerInput = GetComponent<PlayerInput>();
@@ -35,6 +38,7 @@ namespace Escaplanet.Ingame.Presentation.Player
         {
             if (context.action.name == "Movement")
                 MoveInput = context.ReadValue<float>();
+
             if (context.action.name == "Jump")
             {
                 if (context.started)
@@ -48,6 +52,22 @@ namespace Escaplanet.Ingame.Presentation.Player
                 else if (context.canceled)
                 {
                     _jumpInputSubject.OnNext(InputState.Up);
+                }
+            }
+
+            if (context.action.name == "SwitchCamera")
+            {
+                if (context.started)
+                {
+                    _switchCameraInputSubject.OnNext(InputState.Down);
+                }
+                else if (context.performed)
+                {
+                    _switchCameraInputSubject.OnNext(InputState.Hold);
+                }
+                else if (context.canceled)
+                {
+                    _switchCameraInputSubject.OnNext(InputState.Up);
                 }
             }
         }

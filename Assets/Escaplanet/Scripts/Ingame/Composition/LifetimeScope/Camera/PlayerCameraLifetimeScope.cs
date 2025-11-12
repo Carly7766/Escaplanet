@@ -10,10 +10,7 @@ namespace Escaplanet.Ingame.Composition.LifetimeScope.Camera
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            var virtualCamera = GetComponent<IPlayerCameraCore>();
-            builder.RegisterInstance(virtualCamera);
-
-            builder.Register<PlayerCameraUpdateLogic>(Lifetime.Scoped).As<IPlayerCameraUpdateLogic>();
+            builder.RegisterInstance(GetComponent<IPlayerCameraCore>()).AsSelf();
 
             builder.RegisterEntryPoint<PlayerCameraEntryPoint>(Lifetime.Scoped);
         }
