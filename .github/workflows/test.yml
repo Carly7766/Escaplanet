@@ -24,7 +24,7 @@ jobs:
           dotnet: true
           haskell: true
           large-packages: true
-          docker-images: true
+          docker-images: false
           swap-storage: true
 
       - name: Checkout (with LFS)
@@ -36,9 +36,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: Library
-          key: Library-WebGL-${{ hashFiles('**/Packages/manifest.json', '**/Packages/packages-lock.json', '**/ProjectSettings/ProjectVersion.txt') }}
+          key: Library-${{ hashFiles('**/Packages/manifest.json', '**/Packages/packages-lock.json', '**/ProjectSettings/ProjectVersion.txt') }}
           restore-keys: |
-            Library-WebGL-
+            Library-
 
       - name: Run Tests
         uses: game-ci/unity-test-runner@v4
