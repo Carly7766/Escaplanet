@@ -1,4 +1,6 @@
-﻿using Escaplanet.Ingame.Core.Camera;
+﻿using System;
+using Escaplanet.Ingame.Core.Camera;
+using LitMotion;
 using UnityEngine;
 using Vector2 = Escaplanet.Root.Common.ValueObject.Vector2;
 
@@ -10,15 +12,23 @@ namespace Escaplanet.Ingame.Presentation.Camera
 
         private UnityEngine.Camera _camera;
         private Transform _transform;
+        [SerializeField] private float transitionDuration = 2f;
 
         #endregion
 
         #region Interface Fields
 
-        public CameraState CurrentState { get; set; }
+        public CameraState CurrentState => new CameraState(
+            new Vector2(_transform.localPosition.x, _transform.localPosition.y),
+            _transform.localRotation.eulerAngles.z,
+            _camera.orthographicSize);
 
         public IVirtualCameraCore ActiveCamera { get; set; }
         public IVirtualCameraCore PreviousCamera { get; set; }
+
+        public bool IsTransitioning { get; set; }
+        public float TransitionDuration => transitionDuration;
+        public float TransitionTimer { get; set; }
 
         #endregion
 
@@ -28,8 +38,6 @@ namespace Escaplanet.Ingame.Presentation.Camera
         {
             _camera = GetComponent<UnityEngine.Camera>();
             _transform = GetComponent<Transform>();
-            CurrentState = new CameraState(new Vector2(_transform.localPosition.x, _transform.localPosition.y),
-                _transform.localRotation.z, _camera.orthographicSize);
         }
 
         #endregion

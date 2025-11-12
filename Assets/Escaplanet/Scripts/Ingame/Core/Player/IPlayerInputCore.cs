@@ -7,5 +7,6 @@ namespace Escaplanet.Ingame.Core.Player
     {
         float MoveInput { get; }
         Observable<InputState> OnJumpInput { get; }
+        Observable<InputState> OnSwitchCameraInput { get; }
     }
 }
