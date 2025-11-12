@@ -2,7 +2,7 @@ name: Unity WebGL - PR Tests
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -36,7 +36,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: Library
-          key: Library-WebGL-${{ hashFiles("**/Packages/manifest.json", "**/Packages/packages-lock.json", "**/ProjectSettings/ProjectVersion.txt") }}
+          key: Library-WebGL-${{ hashFiles('**/Packages/manifest.json', '**/Packages/packages-lock.json', '**/ProjectSettings/ProjectVersion.txt') }}
           restore-keys: |
             Library-WebGL-
 
