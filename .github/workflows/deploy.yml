@@ -27,6 +27,7 @@ jobs:
           key: Library-WebGL-${{ hashFiles('**/Packages/manifest.json', '**/Packages/packages-lock.json', '**/ProjectSettings/ProjectVersion.txt') }}
           restore-keys: |
             Library-WebGL-
+            Library-
 
       - name: Unity Builder (WebGL)
         uses: game-ci/unity-builder@v4
