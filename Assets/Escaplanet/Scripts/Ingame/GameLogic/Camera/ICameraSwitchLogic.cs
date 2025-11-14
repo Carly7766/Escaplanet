@@ -2,7 +2,7 @@
 
 namespace Escaplanet.Ingame.GameLogic.Camera
 {
-    public interface IMainCameraSwitchLogic
+    public interface ICameraSwitchLogic
     {
         void SwitchCamera(IMainCameraCore mainCamera, IVirtualCameraCore virtualCamera);
     }

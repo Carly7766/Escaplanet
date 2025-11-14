@@ -10,14 +10,12 @@ namespace Escaplanet.Ingame.Composition.LifetimeScope.Player
 {
     public class PlayerLifetimeScope : VContainer.Unity.LifetimeScope
     {
-        [SerializeField] private CountdownTextComponent countdownTextComponent;
-
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterComponent(GetComponent<IPlayerInputCore>()).AsSelf();
-            builder.RegisterComponent(GetComponent<IPlayerMovementCore>()).AsSelf();
-            builder.RegisterComponent(GetComponent<IGameOverDetectableCore>()).AsSelf();
-            builder.RegisterComponent(countdownTextComponent).AsImplementedInterfaces();
+            builder.RegisterComponent(GetComponentInChildren<IPlayerInputCore>()).AsSelf();
+            builder.RegisterComponent(GetComponentInChildren<IPlayerMovementCore>()).AsSelf();
+            builder.RegisterComponent(GetComponentInChildren<IGameOverDetectableCore>()).AsSelf();
+            builder.RegisterComponent(GetComponentInChildren<CountdownTextComponent>()).AsImplementedInterfaces();
 
             builder.RegisterEntryPoint<PlayerEntryPoint>(Lifetime.Scoped);
         }
