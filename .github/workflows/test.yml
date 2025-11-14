@@ -25,12 +25,12 @@ jobs:
             Library-
 
       - name: Run tests
-          uses: game-ci/unity-test-runner@v4
-          env:
-            UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-            UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-            UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
-          with:
-            scopedRegistryUrl: https://package.openupm.com
-            registryScopes: "org.nuget, com.cysharp"
-            githubToken: ${{ secrets.GITHUB_TOKEN }}
+        uses: game-ci/unity-test-runner@v4
+        env:
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+        with:
+          scopedRegistryUrl: https://package.openupm.com
+          registryScopes: "org.nuget, com.cysharp"
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
