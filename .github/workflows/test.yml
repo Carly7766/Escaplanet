@@ -1,4 +1,4 @@
-name: test
+name: Unity Compile Test
 
 on:
   pull_request:
@@ -27,7 +27,7 @@ jobs:
             Library-WebGL-
             Library-
 
-      - name: Run Tests
+      - name: Run Unity Tests
         uses: game-ci/unity-test-runner@v4
         env:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
