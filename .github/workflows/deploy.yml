@@ -53,13 +53,11 @@ jobs:
         with:
           projectPath: .
           targetPlatform: WebGL
-          buildsPath: build
-          buildName: site
 
       - name: Upload Pages artifact (WebGL build)
         uses: actions/upload-pages-artifact@v4
         with:
-          path: build/WebGL/site
+          path: build/WebGL/WebGL
 
   deploy:
     name: Deploy to GitHub Pages
