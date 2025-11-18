@@ -3,6 +3,7 @@
     public interface IMainCameraCore
     {
         CameraState CurrentState { get; }
+        float Aspect { get; }
 
         IVirtualCameraCore ActiveCamera { get; set; }
         IVirtualCameraCore PreviousCamera { get; set; }

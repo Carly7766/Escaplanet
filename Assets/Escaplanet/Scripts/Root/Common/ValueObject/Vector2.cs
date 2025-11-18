@@ -76,7 +76,7 @@ namespace Escaplanet.Root.Common.ValueObject
 
         #endregion
 
-        #region Utility
+        #region Utilities
 
         public float Magnitude()
         {
