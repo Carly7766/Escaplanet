@@ -8,7 +8,7 @@ namespace Escaplanet.Ingame.Presentation.Camera
         #region Unity Fields
 
         private Transform _transform;
-        [SerializeField] private float orthographicSize = 15f;
+        [SerializeField] protected float orthographicSize = 15f;
 
         #endregion
 
@@ -32,7 +32,7 @@ namespace Escaplanet.Ingame.Presentation.Camera
 
         #region MonoBehaviour Functions
 
-        private void Awake()
+        protected virtual void Awake()
         {
             _transform = GetComponent<Transform>();
         }
