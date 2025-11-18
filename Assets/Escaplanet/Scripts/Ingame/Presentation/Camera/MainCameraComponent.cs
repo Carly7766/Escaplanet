@@ -30,7 +30,7 @@ namespace Escaplanet.Ingame.Presentation.Camera
         public float TransitionDuration => transitionDuration;
         public float TransitionTimer { get; set; }
 
-        #endregion
+        #endregion  
 
         #region MonoBehaviour Functions
 
