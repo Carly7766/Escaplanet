@@ -1,8 +1,6 @@
-﻿using System;
-using Escaplanet.Ingame.Core.Camera;
-using LitMotion;
+﻿using Escaplanet.Ingame.Core.Camera;
 using UnityEngine;
-using Vector2 = Escaplanet.Root.Common.ValueObject.Vector2;
+using Vector3 = Escaplanet.Root.Common.ValueObject.Vector3;
 
 namespace Escaplanet.Ingame.Presentation.Camera
 {
@@ -18,10 +16,12 @@ namespace Escaplanet.Ingame.Presentation.Camera
 
         #region Interface Fields
 
-        public CameraState CurrentState => new CameraState(
-            new Vector2(_transform.localPosition.x, _transform.localPosition.y),
+        public CameraState CurrentState => new(
+            new Vector3(_transform.localPosition.x, _transform.localPosition.y, _transform.position.z),
             _transform.localRotation.eulerAngles.z,
             _camera.orthographicSize);
+
+        public float Aspect => _camera.aspect;
 
         public IVirtualCameraCore ActiveCamera { get; set; }
         public IVirtualCameraCore PreviousCamera { get; set; }
@@ -46,7 +46,7 @@ namespace Escaplanet.Ingame.Presentation.Camera
 
         public void ApplyCameraState(CameraState state)
         {
-            _transform.localPosition = new Vector3(state.Position.X, state.Position.Y, -10);
+            _transform.localPosition = new UnityEngine.Vector3(state.Position.X, state.Position.Y, state.Position.Z);
             _transform.localRotation = Quaternion.Euler(0, 0, state.Rotation);
             _camera.orthographicSize = state.OrthographicSize;
         }

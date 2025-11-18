@@ -4,11 +4,11 @@ namespace Escaplanet.Ingame.Core.Camera
 {
     public struct CameraState
     {
-        public Vector2 Position;
+        public Vector3 Position;
         public float Rotation;
         public float OrthographicSize;
 
-        public CameraState(Vector2 position, float rotation, float orthographicSize)
+        public CameraState(Vector3 position, float rotation, float orthographicSize)
         {
             Position = position;
             Rotation = rotation;
@@ -19,7 +19,7 @@ namespace Escaplanet.Ingame.Core.Camera
         {
             return new CameraState
             {
-                Position = Vector2.Lerp(a.Position, b.Position, t),
+                Position = Vector3.Lerp(a.Position, b.Position, t),
                 Rotation = LerpAngle(a.Rotation, b.Rotation, t),
                 OrthographicSize = LerpFloat(a.OrthographicSize, b.OrthographicSize, t),
             };
