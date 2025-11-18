@@ -14,23 +14,31 @@ namespace Escaplanet.Ingame.EntryPoint.Camera
         private IMainCameraControlCore _mainCameraControl;
         private IWorldVirtualCameraCore _worldVirtualCamera;
         private IPlayerInputCore _playerInputCore;
+        private ICameraBackgroundCore _backgroundCore;
+
         private ICameraUpdateLogic _cameraUpdateLogic;
         private ICameraSwitchLogic _cameraSwitchLogic;
         private ICameraControlLogic _cameraControlLogic;
+
+        private CameraBackgroundFitLogic _cameraBackgroundFitLogic;
+
         private CompositeDisposable _disposables = new();
 
         public MainCameraEntryPoint(IMainCameraCore mainCamera, IMainCameraControlCore mainCameraControl,
             IWorldVirtualCameraCore worldVirtualCamera, IPlayerInputCore playerInputCore,
-            ICameraUpdateLogic cameraUpdateLogic, ICameraSwitchLogic cameraSwitchLogic,
-            ICameraControlLogic cameraControlLogic)
+            ICameraBackgroundCore backgroundCore, ICameraUpdateLogic cameraUpdateLogic,
+            ICameraSwitchLogic cameraSwitchLogic, ICameraControlLogic cameraControlLogic,
+            CameraBackgroundFitLogic cameraBackgroundFitLogic)
         {
             _mainCamera = mainCamera;
             _mainCameraControl = mainCameraControl;
             _worldVirtualCamera = worldVirtualCamera;
             _playerInputCore = playerInputCore;
+            _backgroundCore = backgroundCore;
             _cameraUpdateLogic = cameraUpdateLogic;
             _cameraSwitchLogic = cameraSwitchLogic;
             _cameraControlLogic = cameraControlLogic;
+            _cameraBackgroundFitLogic = cameraBackgroundFitLogic;
         }
 
         public void Start()
@@ -51,6 +59,7 @@ namespace Escaplanet.Ingame.EntryPoint.Camera
         public void PostLateTick()
         {
             _cameraUpdateLogic.LateUpdate(_mainCamera);
+            _cameraBackgroundFitLogic.UpdateFitCamera(_mainCamera, _backgroundCore);
         }
 
         public void Dispose()

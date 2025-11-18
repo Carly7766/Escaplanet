@@ -16,11 +16,13 @@ namespace Escaplanet.Ingame.Presentation.Camera
 
         public CameraState State
         {
-            get => new(new Root.Common.ValueObject.Vector2(_transform.localPosition.x, _transform.localPosition.y),
+            get => new(
+                new Root.Common.ValueObject.Vector3(_transform.localPosition.x, _transform.localPosition.y,
+                    _transform.localPosition.z),
                 _transform.localRotation.z, orthographicSize);
             set
             {
-                _transform.position = new UnityEngine.Vector2(value.Position.X, value.Position.Y);
+                _transform.position = new UnityEngine.Vector3(value.Position.X, value.Position.Y, value.Position.Z);
                 _transform.rotation = Quaternion.Euler(0f, 0f, value.Rotation);
                 orthographicSize = value.OrthographicSize;
             }
