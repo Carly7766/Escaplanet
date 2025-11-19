@@ -1,4 +1,5 @@
-﻿using Escaplanet.Ingame.GameLogic.Attract;
+﻿using Escaplanet.Ingame.EntryPoint.Game;
+using Escaplanet.Ingame.GameLogic.Attract;
 using Escaplanet.Ingame.GameLogic.Camera;
 using Escaplanet.Ingame.GameLogic.Camera.PlayerCamera;
 using Escaplanet.Ingame.GameLogic.GameOver;
@@ -13,8 +14,8 @@ namespace Escaplanet.Ingame.Composition.LifetimeScope
 {
     public class IngameLifetimeScope : VContainer.Unity.LifetimeScope
     {
-        [SerializeField] private GameOverPolicyScriptableObject _gameOverPolicyScriptableObject;
-        [SerializeField] private GameOverLogicComponent _gameOverLogicComponent;
+        [SerializeField] private GameOverPolicyScriptableObject gameOverPolicyScriptableObject;
+        [SerializeField] private GameOverLogicComponent gameOverLogicComponent;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -40,13 +41,16 @@ namespace Escaplanet.Ingame.Composition.LifetimeScope
             builder.Register<CameraControlLogic>(Lifetime.Singleton).AsImplementedInterfaces();
 
             // PlayerCamera Logic
-            builder.Register<PlayerCameraUpdateLogic>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<PlayerCameraUpdateLogic>(Lifetime.Singleton).AsImplementedInterfaces();
 
             // GameOver Logic
-            builder.RegisterInstance(_gameOverPolicyScriptableObject).AsImplementedInterfaces();
-            builder.RegisterComponent(_gameOverLogicComponent).AsImplementedInterfaces();
+            builder.RegisterInstance(gameOverPolicyScriptableObject).AsImplementedInterfaces();
+            builder.RegisterComponent(gameOverLogicComponent).AsImplementedInterfaces();
             builder.Register<GameOverLogic>(Lifetime.Singleton).AsSelf();
             builder.Register<GameOverMiaDetectionLogic>(Lifetime.Singleton).AsSelf();
+
+            // EntryPoint
+            builder.RegisterEntryPoint<IngameEntryPoint>(Lifetime.Singleton);
         }
     }
 }

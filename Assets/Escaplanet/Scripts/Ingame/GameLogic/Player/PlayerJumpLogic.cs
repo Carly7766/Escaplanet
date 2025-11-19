@@ -1,6 +1,7 @@
 using Escaplanet.Ingame.Core.Player;
 using Escaplanet.Root.Common;
 using Escaplanet.Root.Common.ValueObject;
+using Escaplanet.Root.Core.Common;
 
 namespace Escaplanet.Ingame.GameLogic.Player
 {

@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using Escaplanet.Root.Common;
+using Escaplanet.Root.Core.Common;
+using UnityEngine;
 
-namespace Escaplanet.Root.Common
+namespace Escaplanet.Root.Presentation
 {
     public class UnityGlobalValuePort : MonoBehaviour, IGlobalValuePort
     {

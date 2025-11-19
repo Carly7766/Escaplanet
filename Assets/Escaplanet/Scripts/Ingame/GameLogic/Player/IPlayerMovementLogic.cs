@@ -6,6 +6,6 @@ namespace Escaplanet.Ingame.GameLogic.Player
     public interface IPlayerMovementLogic
     {
         public void UpdateMovement(IAttractableCore attractable, IPlayerMovementCore playerMovement,
-            IPlayerInputCore playerInput);
+            IPlayerInputCore playerInput, IPlayerAppearanceCore playerAppearance);
     }
 }
