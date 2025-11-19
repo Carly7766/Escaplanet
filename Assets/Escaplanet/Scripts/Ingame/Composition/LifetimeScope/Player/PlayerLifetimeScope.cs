@@ -12,9 +12,10 @@ namespace Escaplanet.Ingame.Composition.LifetimeScope.Player
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterComponent(GetComponentInChildren<IPlayerInputCore>()).AsSelf();
-            builder.RegisterComponent(GetComponentInChildren<IPlayerMovementCore>()).AsSelf();
-            builder.RegisterComponent(GetComponentInChildren<IGameOverDetectableCore>()).AsSelf();
+            builder.RegisterComponent(GetComponentInChildren<IPlayerInputCore>());
+            builder.RegisterComponent(GetComponentInChildren<IPlayerMovementCore>());
+            builder.RegisterComponent(GetComponentInChildren<IPlayerAppearanceCore>());
+            builder.RegisterComponent(GetComponentInChildren<IGameOverDetectableCore>());
             builder.RegisterComponent(GetComponentInChildren<CountdownTextComponent>()).AsImplementedInterfaces();
 
             builder.RegisterEntryPoint<PlayerEntryPoint>(Lifetime.Scoped);

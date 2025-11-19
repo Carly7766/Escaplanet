@@ -17,6 +17,7 @@ namespace Escaplanet.Ingame.EntryPoint.Player
         private IAttractableCore _playerAttractableCore;
         private IPlayerInputCore _playerInputCore;
         private IPlayerMovementCore _playerMovementCore;
+        private IPlayerAppearanceCore _playerAppearanceCore;
         private IGameOverDetectableCore _playerGameOverDetectableCore;
 
         private ICountdownTextCore _countdownTextCore;
@@ -30,20 +31,21 @@ namespace Escaplanet.Ingame.EntryPoint.Player
         private CompositeDisposable _disposables = new();
 
         public PlayerEntryPoint(IAttractableCore playerAttractableCore, IPlayerInputCore playerInputCore,
-            IPlayerMovementCore playerMovementCore, ICountdownTextCore countdownTextCore,
+            IPlayerMovementCore playerMovementCore, IPlayerAppearanceCore playerAppearanceCore,
+            IGameOverDetectableCore playerGameOverDetectableCore, ICountdownTextCore countdownTextCore,
             IPlayerMovementLogic playerMovementLogic, IPlayerJumpLogic playerJumpLogic,
-            PlayerGroundDetectionLogic playerGroundDetectionLogic, GameOverMiaDetectionLogic gameOverMiaDetectionLogic,
-            IGameOverDetectableCore playerGameOverDetectableCore)
+            PlayerGroundDetectionLogic playerGroundDetectionLogic, GameOverMiaDetectionLogic gameOverMiaDetectionLogic)
         {
             _playerAttractableCore = playerAttractableCore;
             _playerInputCore = playerInputCore;
             _playerMovementCore = playerMovementCore;
+            _playerAppearanceCore = playerAppearanceCore;
+            _playerGameOverDetectableCore = playerGameOverDetectableCore;
             _countdownTextCore = countdownTextCore;
             _playerMovementLogic = playerMovementLogic;
             _playerJumpLogic = playerJumpLogic;
             _playerGroundDetectionLogic = playerGroundDetectionLogic;
             _gameOverMiaDetectionLogic = gameOverMiaDetectionLogic;
-            _playerGameOverDetectableCore = playerGameOverDetectableCore;
         }
 
         public void Start()
@@ -68,7 +70,8 @@ namespace Escaplanet.Ingame.EntryPoint.Player
 
         public void FixedTick()
         {
-            _playerMovementLogic.UpdateMovement(_playerAttractableCore, _playerMovementCore, _playerInputCore);
+            _playerMovementLogic.UpdateMovement(_playerAttractableCore, _playerMovementCore, _playerInputCore,
+                _playerAppearanceCore);
             _playerJumpLogic.FixedUpdateJump(_playerMovementCore);
         }
 
