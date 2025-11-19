@@ -17,7 +17,7 @@ namespace Escaplanet.Ingame.GameLogic.Player
         }
 
         public void UpdateMovement(IAttractableCore attractable, IPlayerMovementCore playerMovement,
-            IPlayerInputCore playerInput)
+            IPlayerInputCore playerInput, IPlayerAppearanceCore playerAppearance)
         {
             if (attractable.NearestSource == null) return;
             if (playerMovement.IsBlownAway) return;
@@ -36,6 +36,15 @@ namespace Escaplanet.Ingame.GameLogic.Player
             }
 
             var targetSpeed = playerInput.MoveInput * playerMovement.MaxMoveSpeed;
+            if (playerInput.MoveInput < 0f && playerAppearance.IsFacingRight)
+            {
+                playerAppearance.Flip(false);
+            }
+            else if (playerInput.MoveInput > 0f && !playerAppearance.IsFacingRight)
+            {
+                playerAppearance.Flip(true);
+            }
+
             targetSpeed = _floatMathPort.Lerp(perpendicularSpeed, targetSpeed, playerMovement.MovementLerpFactor);
 
             var accelRate = playerMovement.MoveAcceleration / playerMovement.MaxMoveSpeed *
