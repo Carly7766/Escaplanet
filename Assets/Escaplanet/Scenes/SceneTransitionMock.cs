@@ -3,13 +3,15 @@ using UnityEngine.SceneManagement;
 
 namespace Escaplanet.Escaplanet.Scenes
 {
-    public class BackToIngameMok : MonoBehaviour
+    public class SceneTransitionMock : MonoBehaviour
     {
-        void Update()
+        [SerializeField] private string sceneName;
+
+        private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                SceneManager.LoadScene("Ingame");
+                SceneManager.LoadScene(sceneName);
             }
         }
     }

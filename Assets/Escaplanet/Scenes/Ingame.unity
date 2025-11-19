@@ -2735,11 +2735,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: 
+    TypeName: Escaplanet.Root.Composition.RootLifetimeScope
   autoRun: 1
   autoInjectGameObjects: []
-  _gameOverPolicyScriptableObject: {fileID: 11400000, guid: d1059e825153fad4fb92fba2ac6cc191, type: 2}
-  _gameOverLogicComponent: {fileID: 1917737022}
+  gameOverPolicyScriptableObject: {fileID: 11400000, guid: d1059e825153fad4fb92fba2ac6cc191, type: 2}
+  gameOverLogicComponent: {fileID: 1917737022}
 --- !u!114 &1917737022
 MonoBehaviour:
   m_ObjectHideFlags: 0

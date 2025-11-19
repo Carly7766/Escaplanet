@@ -5,6 +5,7 @@ using Escaplanet.Ingame.Core.Attract;
 using Escaplanet.Ingame.Core.GameOver;
 using Escaplanet.Ingame.Core.UI;
 using Escaplanet.Root.Common;
+using Escaplanet.Root.Core.Common;
 
 namespace Escaplanet.Ingame.GameLogic.GameOver
 {

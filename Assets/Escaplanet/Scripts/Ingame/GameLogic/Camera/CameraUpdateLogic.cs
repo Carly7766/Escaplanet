@@ -1,5 +1,6 @@
 ﻿using Escaplanet.Ingame.Core.Camera;
 using Escaplanet.Root.Common;
+using Escaplanet.Root.Core.Common;
 
 namespace Escaplanet.Ingame.GameLogic.Camera
 {
