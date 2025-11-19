@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Escaplanet.Root.Core.Common;
+using UnityEngine;
 
-namespace Escaplanet.Root.Common
+namespace Escaplanet.Root.Presentation
 {
     public class UnityFloatMathPort : IFloatMathPort
     {

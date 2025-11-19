@@ -2,6 +2,7 @@
 using Escaplanet.Ingame.Core.Attract;
 using Escaplanet.Root.Common;
 using Escaplanet.Root.Common.ValueObject;
+using Escaplanet.Root.Core.Common;
 
 namespace Escaplanet.Ingame.GameLogic.Attract
 {

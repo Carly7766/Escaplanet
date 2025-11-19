@@ -1,6 +1,7 @@
 ﻿using System;
 using Escaplanet.Ingame.Core.Attract;
 using Escaplanet.Root.Common;
+using Escaplanet.Root.Core.Common;
 
 namespace Escaplanet.Ingame.GameLogic.Attract
 {

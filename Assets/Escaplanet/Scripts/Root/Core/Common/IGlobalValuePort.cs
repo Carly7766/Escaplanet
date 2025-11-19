@@ -1,4 +1,4 @@
-﻿namespace Escaplanet.Root.Common
+﻿namespace Escaplanet.Root.Core.Common
 {
     public interface IGlobalValuePort
     {
