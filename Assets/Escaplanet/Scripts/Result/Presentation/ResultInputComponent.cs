@@ -1,11 +1,11 @@
-﻿using Escaplanet.Root.Core.Common.ValueObject;
-using Escaplanet.Title.Core;
+﻿using Escaplanet.Result.GameLogic;
+using Escaplanet.Root.Core.Common.ValueObject;
 using R3;
 using UnityEngine;
 
-namespace Escaplanet.Title.Presentation
+namespace Escaplanet.Result.Presentation
 {
-    public class TitleInputComponent : MonoBehaviour, ITitleInputCore
+    public class ResultInputComponent : MonoBehaviour, IResultInputCore
     {
         private readonly Subject<InputState> _onInputTransitionSubject = new();
         public Observable<InputState> OnInputTransition => _onInputTransitionSubject;

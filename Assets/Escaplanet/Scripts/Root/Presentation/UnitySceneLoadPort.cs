@@ -7,24 +7,19 @@ namespace Escaplanet.Root.Presentation
 {
     public class UnitySceneLoadPort : MonoBehaviour, ISceneLoadPort
     {
-        public void LoadScene(GameState gameState)
+        public void LoadTitleScene()
         {
-            switch (gameState)
-            {
-                case GameState.Title:
-                    SceneManager.LoadScene("Title");
-                    break;
-                case GameState.Ingame:
-                    SceneManager.LoadScene("Ingame");
-                    break;
-                case GameState.GameOver:
-                    SceneManager.LoadScene("GameOver");
-                    break;
-                case GameState.None:
-                default:
-                    Debug.LogWarning("Unsupported GameState: " + gameState);
-                    break;
-            }
+            SceneManager.LoadScene("Title");
+        }
+
+        public void LoadIngameScene()
+        {
+            SceneManager.LoadScene("Ingame");
+        }
+
+        public void LoadResultScene()
+        {
+            SceneManager.LoadScene("Result");
         }
     }
 }

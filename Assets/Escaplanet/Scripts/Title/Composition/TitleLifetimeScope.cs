@@ -1,10 +1,10 @@
-using Escaplanet.Escaplanet.Title.EntryPoint;
-using Escaplanet.Escaplanet.Title.Presentation;
+using Escaplanet.Title.EntryPoint;
+using Escaplanet.Title.Presentation;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Escaplanet.Escaplanet.Title.Composition
+namespace Escaplanet.Title.Composition
 {
     public class TitleLifetimeScope : LifetimeScope
     {

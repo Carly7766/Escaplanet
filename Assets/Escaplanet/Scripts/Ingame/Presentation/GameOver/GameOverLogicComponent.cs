@@ -8,7 +8,7 @@ namespace Escaplanet.Ingame.Presentation.GameOver
     {
         public void GameOver()
         {
-            SceneManager.LoadScene("GameOver");
+            SceneManager.LoadScene("Result");
         }
     }
 }

@@ -2,6 +2,8 @@
 {
     public interface ISceneLoadPort
     {
-        void LoadScene(GameState gameState);
+        void LoadTitleScene();
+        void LoadIngameScene();
+        void LoadResultScene();
     }
 }

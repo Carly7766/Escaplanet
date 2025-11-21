@@ -2735,7 +2735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: Escaplanet.Root.Composition.RootLifetimeScope
+    TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
   gameOverPolicyScriptableObject: {fileID: 11400000, guid: d1059e825153fad4fb92fba2ac6cc191, type: 2}

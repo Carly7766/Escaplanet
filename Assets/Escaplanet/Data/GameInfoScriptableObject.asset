@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb2d2d37e6904577855476dafb974587, type: 3}
   m_Name: GameInfoScriptableObject
   m_EditorClassIdentifier: 
-  gameState: 2
+  gameState: 3
   gameResult: 0
   gameOverType: 0
