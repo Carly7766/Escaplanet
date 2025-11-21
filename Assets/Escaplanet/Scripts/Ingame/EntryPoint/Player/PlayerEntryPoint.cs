@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using Cysharp.Threading.Tasks;
 using Escaplanet.Ingame.Core.Attract;
 using Escaplanet.Ingame.Core.GameOver;
 using Escaplanet.Ingame.Core.Player;
@@ -14,21 +13,20 @@ namespace Escaplanet.Ingame.EntryPoint.Player
 {
     public class PlayerEntryPoint : IStartable, ITickable, IFixedTickable, IDisposable
     {
-        private IAttractableCore _playerAttractableCore;
-        private IPlayerInputCore _playerInputCore;
-        private IPlayerMovementCore _playerMovementCore;
-        private IPlayerAppearanceCore _playerAppearanceCore;
-        private IGameOverDetectableCore _playerGameOverDetectableCore;
+        private readonly ICountdownTextCore _countdownTextCore;
+        private readonly CompositeDisposable _disposables = new();
+        private readonly GameOverMiaDetectionLogic _gameOverMiaDetectionLogic;
+        private readonly IPlayerAppearanceCore _playerAppearanceCore;
+        private readonly IAttractableCore _playerAttractableCore;
+        private readonly IGameOverDetectableCore _playerGameOverDetectableCore;
+        private readonly PlayerGroundDetectionLogic _playerGroundDetectionLogic;
+        private readonly IPlayerInputCore _playerInputCore;
+        private readonly IPlayerJumpLogic _playerJumpLogic;
+        private readonly IPlayerMovementCore _playerMovementCore;
 
-        private ICountdownTextCore _countdownTextCore;
-
-        private IPlayerMovementLogic _playerMovementLogic;
-        private IPlayerJumpLogic _playerJumpLogic;
-        private PlayerGroundDetectionLogic _playerGroundDetectionLogic;
-        private GameOverMiaDetectionLogic _gameOverMiaDetectionLogic;
+        private readonly IPlayerMovementLogic _playerMovementLogic;
 
         private CancellationTokenSource _cancellationTokenSource;
-        private CompositeDisposable _disposables = new();
 
         public PlayerEntryPoint(IAttractableCore playerAttractableCore, IPlayerInputCore playerInputCore,
             IPlayerMovementCore playerMovementCore, IPlayerAppearanceCore playerAppearanceCore,
@@ -46,6 +44,19 @@ namespace Escaplanet.Ingame.EntryPoint.Player
             _playerJumpLogic = playerJumpLogic;
             _playerGroundDetectionLogic = playerGroundDetectionLogic;
             _gameOverMiaDetectionLogic = gameOverMiaDetectionLogic;
+        }
+
+        public void Dispose()
+        {
+            _disposables.Dispose();
+            _cancellationTokenSource.Cancel();
+        }
+
+        public void FixedTick()
+        {
+            _playerMovementLogic.UpdateMovement(_playerAttractableCore, _playerMovementCore, _playerInputCore,
+                _playerAppearanceCore);
+            _playerJumpLogic.FixedUpdateJump(_playerMovementCore);
         }
 
         public void Start()
@@ -66,19 +77,6 @@ namespace Escaplanet.Ingame.EntryPoint.Player
             _playerJumpLogic.UpdateJumpCharge(_playerMovementCore);
             _gameOverMiaDetectionLogic.Update(_playerAttractableCore, _playerGameOverDetectableCore, _countdownTextCore,
                 _cancellationTokenSource.Token);
-        }
-
-        public void FixedTick()
-        {
-            _playerMovementLogic.UpdateMovement(_playerAttractableCore, _playerMovementCore, _playerInputCore,
-                _playerAppearanceCore);
-            _playerJumpLogic.FixedUpdateJump(_playerMovementCore);
-        }
-
-        public void Dispose()
-        {
-            _disposables.Dispose();
-            _cancellationTokenSource.Cancel();
         }
     }
 }

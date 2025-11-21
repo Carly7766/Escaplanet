@@ -4,7 +4,7 @@ namespace Escaplanet.Root.GameLogic
 {
     public class GameStateChangeLogic
     {
-        private IGameInfoCore _gameInfoCore;
+        private readonly IGameInfoCore _gameInfoCore;
 
         public GameStateChangeLogic(IGameInfoCore gameInfoCore)
         {

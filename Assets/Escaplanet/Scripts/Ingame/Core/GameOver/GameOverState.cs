@@ -4,6 +4,6 @@
     {
         Grounded,
         GracePeriod,
-        Countdown,
+        Countdown
     }
 }

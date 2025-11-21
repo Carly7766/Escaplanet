@@ -5,13 +5,13 @@ namespace Escaplanet.Escaplanet.Scenes
 {
     public class SceneTransitionMock : MonoBehaviour
     {
-        [SerializeField] private string sceneName;
+        [SerializeField] private string _sceneName;
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                SceneManager.LoadScene(sceneName);
+                SceneManager.LoadScene(_sceneName);
             }
         }
     }

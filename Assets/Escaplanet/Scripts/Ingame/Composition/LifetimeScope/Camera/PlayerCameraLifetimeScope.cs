@@ -1,6 +1,5 @@
 ﻿using Escaplanet.Ingame.Core.Camera;
 using Escaplanet.Ingame.EntryPoint.Camera;
-using Escaplanet.Ingame.GameLogic.Camera.PlayerCamera;
 using VContainer;
 using VContainer.Unity;
 

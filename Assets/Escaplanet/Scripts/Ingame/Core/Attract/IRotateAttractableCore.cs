@@ -1,5 +1,4 @@
-﻿
-namespace Escaplanet.Ingame.Core.Attract
+﻿namespace Escaplanet.Ingame.Core.Attract
 {
     public interface IRotateAttractableCore : IAttractableCore
     {

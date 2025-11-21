@@ -11,7 +11,7 @@ namespace Escaplanet.Ingame.Presentation.Player
     {
         [SerializeField] private float moveSpeed = 5f;
         [SerializeField] private float acceleration = 10f;
-        [SerializeField, Range(0f, 1f)] private float movementLerp = 1f;
+        [SerializeField] [Range(0f, 1f)] private float movementLerp = 1f;
 
         [SerializeField] private bool isFlayingAway;
         [SerializeField] private bool isJumping;
@@ -21,10 +21,22 @@ namespace Escaplanet.Ingame.Presentation.Player
         [SerializeField] private float jumpChargeSpeed = 0.1f;
         [SerializeField] private float jumpPowerMultiplier = 5f;
         [SerializeField] private float chargeJumpPowerMultiplier = 10f;
+        private Collider2D _collider2D;
+        private Rigidbody2D _rigidbody2D;
 
         private Transform _transform;
-        private Rigidbody2D _rigidbody2D;
-        private Collider2D _collider2D;
+
+        private void Awake()
+        {
+            _transform = transform;
+            _rigidbody2D = GetComponent<Rigidbody2D>();
+            _collider2D = GetComponent<Collider2D>();
+
+            OnGrounded = _collider2D.OnCollisionEnter2DAsObservable()
+                .Where(o => o.gameObject.TryGetComponent<IAttractSourceCore>(out _))
+                .Select(_ => Unit.Default)
+                .TakeUntil(destroyCancellationToken);
+        }
 
         public float MaxMoveSpeed => moveSpeed;
         public float MoveAcceleration => acceleration;
@@ -61,18 +73,6 @@ namespace Escaplanet.Ingame.Presentation.Player
         public Vector2 Up => new(_transform.up.x, _transform.up.y);
         public Vector2 Velocity => new(_rigidbody2D.velocity.x, _rigidbody2D.velocity.y);
         public Observable<Unit> OnGrounded { get; private set; }
-
-        private void Awake()
-        {
-            _transform = transform;
-            _rigidbody2D = GetComponent<Rigidbody2D>();
-            _collider2D = GetComponent<Collider2D>();
-
-            OnGrounded = _collider2D.OnCollisionEnter2DAsObservable()
-                .Where(o => o.gameObject.TryGetComponent<IAttractSourceCore>(out _))
-                .Select(_ => Unit.Default)
-                .TakeUntil(destroyCancellationToken);
-        }
 
         public void Move(Vector2 velocity)
         {

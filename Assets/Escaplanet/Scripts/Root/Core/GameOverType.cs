@@ -3,6 +3,6 @@
     public enum GameOverType
     {
         None = 0,
-        SpaceDrifting = 1,
+        SpaceDrifting = 1
     }
 }

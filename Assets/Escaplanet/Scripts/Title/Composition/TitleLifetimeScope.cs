@@ -8,13 +8,13 @@ namespace Escaplanet.Escaplanet.Title.Composition
 {
     public class TitleLifetimeScope : LifetimeScope
     {
-        [SerializeField] TitleInputComponent titleInputComponent;
+        [SerializeField] private TitleInputComponent titleInputComponent;
 
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterInstance(titleInputComponent).AsImplementedInterfaces();
 
-            builder.RegisterEntryPoint<TitleEntryPoint>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<TitleEntryPoint>();
         }
     }
 }

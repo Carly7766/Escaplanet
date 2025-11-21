@@ -4,19 +4,18 @@ using Cysharp.Threading.Tasks;
 using Escaplanet.Ingame.Core.Attract;
 using Escaplanet.Ingame.Core.GameOver;
 using Escaplanet.Ingame.Core.UI;
-using Escaplanet.Root.Common;
 using Escaplanet.Root.Core.Common;
 
 namespace Escaplanet.Ingame.GameLogic.GameOver
 {
     public class GameOverMiaDetectionLogic : IDisposable
     {
-        private IGameOverPolicy _gameOverPolicy;
-        private GameOverLogic _gameOverLogic;
+        private readonly GameOverLogic _gameOverLogic;
+        private readonly IGameOverPolicy _gameOverPolicy;
 
-        private IGlobalValuePort _globalValuePort;
+        private readonly IGlobalValuePort _globalValuePort;
 
-        private CancellationTokenSource _logicCts = new();
+        private readonly CancellationTokenSource _logicCts = new();
 
         public GameOverMiaDetectionLogic(IGameOverPolicy gameOverPolicy, GameOverLogic gameOverLogic,
             IGlobalValuePort globalValuePort)
@@ -24,6 +23,12 @@ namespace Escaplanet.Ingame.GameLogic.GameOver
             _gameOverPolicy = gameOverPolicy;
             _gameOverLogic = gameOverLogic;
             _globalValuePort = globalValuePort;
+        }
+
+        public void Dispose()
+        {
+            _logicCts?.Cancel();
+            _logicCts?.Dispose();
         }
 
         public void Update(IAttractableCore attractable, IGameOverDetectableCore gameOverDetectable,
@@ -78,12 +83,6 @@ namespace Escaplanet.Ingame.GameLogic.GameOver
         {
             await countdownText.RunCountdownAsync(_gameOverPolicy.CountdownSeconds, token);
             _gameOverLogic.GameOver();
-        }
-
-        public void Dispose()
-        {
-            _logicCts?.Cancel();
-            _logicCts?.Dispose();
         }
     }
 }

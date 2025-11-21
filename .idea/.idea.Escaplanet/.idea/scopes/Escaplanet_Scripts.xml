@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Escaplanet Scripts" pattern="file:Assets/Escaplanet/Scripts//*.cs" />
+</component>

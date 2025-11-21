@@ -1,14 +1,17 @@
 ﻿using Escaplanet.Ingame.Core.Camera;
 using UnityEngine;
+using Vector3 = Escaplanet.Root.Common.ValueObject.Vector3;
 
 namespace Escaplanet.Ingame.Presentation.Camera
 {
     public class VirtualCameraComponent : MonoBehaviour, IVirtualCameraCore
     {
-        #region Unity Fields
+        #region MonoBehaviour Functions
 
-        private Transform _transform;
-        [SerializeField] protected float orthographicSize = 15f;
+        protected virtual void Awake()
+        {
+            _transform = GetComponent<Transform>();
+        }
 
         #endregion
 
@@ -17,7 +20,7 @@ namespace Escaplanet.Ingame.Presentation.Camera
         public CameraState State
         {
             get => new(
-                new Root.Common.ValueObject.Vector3(_transform.localPosition.x, _transform.localPosition.y,
+                new Vector3(_transform.localPosition.x, _transform.localPosition.y,
                     _transform.localPosition.z),
                 _transform.localRotation.z, orthographicSize);
             set
@@ -30,12 +33,10 @@ namespace Escaplanet.Ingame.Presentation.Camera
 
         #endregion
 
-        #region MonoBehaviour Functions
+        #region Unity Fields
 
-        protected virtual void Awake()
-        {
-            _transform = GetComponent<Transform>();
-        }
+        private Transform _transform;
+        [SerializeField] protected float orthographicSize = 15f;
 
         #endregion
     }

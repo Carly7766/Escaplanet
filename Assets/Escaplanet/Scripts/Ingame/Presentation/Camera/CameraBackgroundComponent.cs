@@ -1,13 +1,12 @@
-﻿using System;
-using Escaplanet.Ingame.Core.Camera;
+﻿using Escaplanet.Ingame.Core.Camera;
 using UnityEngine;
 
 namespace Escaplanet.Ingame.Presentation.Camera
 {
     public class CameraBackgroundComponent : MonoBehaviour, ICameraBackgroundCore
     {
-        private Transform _transform;
         private SpriteRenderer _spriteRenderer;
+        private Transform _transform;
 
         private void Awake()
         {
@@ -17,7 +16,8 @@ namespace Escaplanet.Ingame.Presentation.Camera
 
         public void FitBackgroundToCamera(CameraState currentState, float mainCameraAspect)
         {
-            _transform.position = new Vector3(currentState.Position.X, currentState.Position.Y, -currentState.Position.Z);
+            _transform.position =
+                new Vector3(currentState.Position.X, currentState.Position.Y, -currentState.Position.Z);
             _transform.localRotation = Quaternion.Euler(0, 0, currentState.Rotation);
 
 

@@ -2,7 +2,6 @@
 using Escaplanet.Ingame.Core.Player;
 using Escaplanet.Ingame.EntryPoint.Player;
 using Escaplanet.Ingame.Presentation.UI;
-using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 

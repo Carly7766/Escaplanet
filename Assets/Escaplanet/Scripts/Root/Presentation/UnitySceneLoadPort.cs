@@ -1,6 +1,7 @@
 ﻿using Escaplanet.Root.Core;
 using Escaplanet.Root.Core.Common;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Escaplanet.Root.Presentation
 {
@@ -11,13 +12,13 @@ namespace Escaplanet.Root.Presentation
             switch (gameState)
             {
                 case GameState.Title:
-                    UnityEngine.SceneManagement.SceneManager.LoadScene("Title");
+                    SceneManager.LoadScene("Title");
                     break;
                 case GameState.Ingame:
-                    UnityEngine.SceneManagement.SceneManager.LoadScene("Ingame");
+                    SceneManager.LoadScene("Ingame");
                     break;
                 case GameState.GameOver:
-                    UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
+                    SceneManager.LoadScene("GameOver");
                     break;
                 case GameState.None:
                 default:

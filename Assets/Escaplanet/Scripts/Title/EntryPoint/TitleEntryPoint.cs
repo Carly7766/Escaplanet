@@ -8,10 +8,10 @@ namespace Escaplanet.Escaplanet.Title.EntryPoint
 {
     public class TitleEntryPoint : IInitializable, IStartable
     {
-        private ITitleInputCore _titleInputCore;
+        private readonly GameStateChangeLogic _gameStateChangeLogic;
 
-        private SceneTransitionLogic _sceneTransitionLogic;
-        private GameStateChangeLogic _gameStateChangeLogic;
+        private readonly SceneTransitionLogic _sceneTransitionLogic;
+        private readonly ITitleInputCore _titleInputCore;
 
         public TitleEntryPoint(ITitleInputCore titleInputCore, SceneTransitionLogic sceneTransitionLogic,
             GameStateChangeLogic gameStateChangeLogic)

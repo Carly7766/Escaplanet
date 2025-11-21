@@ -50,7 +50,7 @@ namespace Escaplanet.Ingame.Composition.LifetimeScope
             builder.Register<GameOverMiaDetectionLogic>(Lifetime.Singleton).AsSelf();
 
             // EntryPoint
-            builder.RegisterEntryPoint<IngameEntryPoint>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<IngameEntryPoint>();
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Escaplanet.Root.GameLogic
 {
     public class SceneTransitionLogic
     {
-        private ISceneLoadPort _sceneLoadPort;
+        private readonly ISceneLoadPort _sceneLoadPort;
 
         public SceneTransitionLogic(ISceneLoadPort sceneLoadPort)
         {

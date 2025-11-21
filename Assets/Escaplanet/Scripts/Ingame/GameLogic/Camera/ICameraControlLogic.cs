@@ -1,5 +1,5 @@
 ﻿using Escaplanet.Ingame.Core.Camera;
-using Escaplanet.Root.Common.ValueObject;
+using Escaplanet.Root.Core.Common.ValueObject;
 
 namespace Escaplanet.Ingame.GameLogic.Camera
 {

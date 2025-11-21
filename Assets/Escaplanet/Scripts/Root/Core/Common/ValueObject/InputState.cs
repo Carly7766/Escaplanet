@@ -1,4 +1,4 @@
-﻿namespace Escaplanet.Root.Common.ValueObject
+﻿namespace Escaplanet.Root.Core.Common.ValueObject
 {
     public enum InputState
     {

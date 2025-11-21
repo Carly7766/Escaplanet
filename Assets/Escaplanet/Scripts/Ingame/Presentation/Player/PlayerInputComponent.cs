@@ -1,5 +1,5 @@
 ﻿using Escaplanet.Ingame.Core.Player;
-using Escaplanet.Root.Common.ValueObject;
+using Escaplanet.Root.Core.Common.ValueObject;
 using R3;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,14 +8,10 @@ namespace Escaplanet.Ingame.Presentation.Player
 {
     public class PlayerInputComponent : MonoBehaviour, IPlayerInputCore
     {
+        private readonly Subject<InputState> _jumpInputSubject = new();
+
+        private readonly Subject<InputState> _switchCameraInputSubject = new();
         private PlayerInput _playerInput;
-
-        public float MoveInput { get; private set; }
-        private Subject<InputState> _jumpInputSubject = new();
-        public Observable<InputState> OnJumpInput => _jumpInputSubject;
-
-        private Subject<InputState> _switchCameraInputSubject = new();
-        public Observable<InputState> OnSwitchCameraInput => _switchCameraInputSubject;
 
         private void Awake()
         {
@@ -34,6 +30,10 @@ namespace Escaplanet.Ingame.Presentation.Player
             _playerInput.onActionTriggered -= OnInputAction;
         }
 
+        public float MoveInput { get; private set; }
+        public Observable<InputState> OnJumpInput => _jumpInputSubject;
+        public Observable<InputState> OnSwitchCameraInput => _switchCameraInputSubject;
+
         private void OnInputAction(InputAction.CallbackContext context)
         {
             if (context.action.name == "Movement")
@@ -42,33 +42,19 @@ namespace Escaplanet.Ingame.Presentation.Player
             if (context.action.name == "Jump")
             {
                 if (context.started)
-                {
                     _jumpInputSubject.OnNext(InputState.Down);
-                }
                 else if (context.performed)
-                {
                     _jumpInputSubject.OnNext(InputState.Hold);
-                }
-                else if (context.canceled)
-                {
-                    _jumpInputSubject.OnNext(InputState.Up);
-                }
+                else if (context.canceled) _jumpInputSubject.OnNext(InputState.Up);
             }
 
             if (context.action.name == "SwitchCamera")
             {
                 if (context.started)
-                {
                     _switchCameraInputSubject.OnNext(InputState.Down);
-                }
                 else if (context.performed)
-                {
                     _switchCameraInputSubject.OnNext(InputState.Hold);
-                }
-                else if (context.canceled)
-                {
-                    _switchCameraInputSubject.OnNext(InputState.Up);
-                }
+                else if (context.canceled) _switchCameraInputSubject.OnNext(InputState.Up);
             }
         }
     }

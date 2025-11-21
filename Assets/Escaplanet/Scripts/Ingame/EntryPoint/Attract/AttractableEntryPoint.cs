@@ -11,9 +11,9 @@ namespace Escaplanet.Ingame.EntryPoint.Attract
         private readonly IAttractableCore _attractable;
         private readonly IAttractAreaDetectionLogic _attractAreaDetectionLogic;
         private readonly IAttractUpdateLogic _attractUpdateLogic;
-        private readonly IRotateUpdateLogic _rotateUpdateLogic;
 
         private readonly CompositeDisposable _disposable = new();
+        private readonly IRotateUpdateLogic _rotateUpdateLogic;
 
         public AttractableEntryPoint(IAttractableCore attractable,
             IAttractAreaDetectionLogic attractAreaDetectionLogic,
@@ -22,6 +22,17 @@ namespace Escaplanet.Ingame.EntryPoint.Attract
             _attractable = attractable;
             _attractAreaDetectionLogic = attractAreaDetectionLogic;
             _attractUpdateLogic = attractUpdateLogic;
+        }
+
+        public void Dispose()
+        {
+            _disposable.Dispose();
+        }
+
+        public void FixedTick()
+        {
+            _attractAreaDetectionLogic.ExcludeDestroyedSources(_attractable);
+            _attractUpdateLogic.UpdateAttract(_attractable);
         }
 
 
@@ -34,17 +45,6 @@ namespace Escaplanet.Ingame.EntryPoint.Attract
             _attractable.OnExitAttractArea
                 .Subscribe(source => { _attractAreaDetectionLogic.OnSourceExit(source, _attractable); })
                 .AddTo(_disposable);
-        }
-
-        public void FixedTick()
-        {
-            _attractAreaDetectionLogic.ExcludeDestroyedSources(_attractable);
-            _attractUpdateLogic.UpdateAttract(_attractable);
-        }
-
-        public void Dispose()
-        {
-            _disposable.Dispose();
         }
     }
 }

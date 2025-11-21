@@ -1,4 +1,4 @@
-﻿using Escaplanet.Root.Common.ValueObject;
+﻿using Escaplanet.Root.Core.Common.ValueObject;
 using R3;
 
 namespace Escaplanet.Escaplanet.Title.Core

@@ -10,15 +10,22 @@ namespace Escaplanet.Ingame.Presentation.Attract
         [SerializeField] private float gravityConstant = 6.67430e-11f;
         [SerializeField] private float surfaceGravity = 1.0f;
 
-        private Transform _transform;
+        private readonly HashSet<IReadonlyAttractableCore> _attractablesInArea = new();
         private CircleCollider2D _planetCollider;
 
-        private readonly HashSet<IReadonlyAttractableCore> _attractablesInArea = new();
+        private Transform _transform;
+
+        public float GravityConstant => gravityConstant;
+
+
+        private void Awake()
+        {
+            _transform = transform;
+            _planetCollider = GetComponent<CircleCollider2D>();
+        }
 
 
         public Vector2 Position => new(_transform.position.x, _transform.position.y);
-
-        public float GravityConstant => gravityConstant;
         public float SurfaceGravity => surfaceGravity;
 
         public float Radius =>
@@ -27,13 +34,6 @@ namespace Escaplanet.Ingame.Presentation.Attract
         public bool IsDestroyed => this == null;
 
         public IReadOnlyCollection<IReadonlyAttractableCore> AttractablesInArea => _attractablesInArea;
-        
-        
-        private void Awake()
-        {
-            _transform = transform;
-            _planetCollider = GetComponent<CircleCollider2D>();
-        }
 
         public void AddAttractableInArea(IReadonlyAttractableCore attractable)
         {

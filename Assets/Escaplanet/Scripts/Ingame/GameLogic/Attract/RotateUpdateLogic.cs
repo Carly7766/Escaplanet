@@ -1,14 +1,13 @@
 ﻿using System;
 using Escaplanet.Ingame.Core.Attract;
-using Escaplanet.Root.Common;
 using Escaplanet.Root.Core.Common;
 
 namespace Escaplanet.Ingame.GameLogic.Attract
 {
     public class RotateUpdateLogic : IRotateUpdateLogic
     {
-        private readonly IGlobalValuePort _globalValuePort;
         private readonly IFloatMathPort _floatMathPort;
+        private readonly IGlobalValuePort _globalValuePort;
 
         public RotateUpdateLogic(IGlobalValuePort globalValuePort, IFloatMathPort floatMathPort)
         {
@@ -71,7 +70,7 @@ namespace Escaplanet.Ingame.GameLogic.Attract
             if (_floatMathPort.Approximately(angularVelocity, 0f))
                 angularVelocity = 0f;
 
-            var overshot = projectedTarget > current ? (output > projectedTarget) : (output < projectedTarget);
+            var overshot = projectedTarget > current ? output > projectedTarget : output < projectedTarget;
             if (overshot)
             {
                 angularVelocity = 0f;

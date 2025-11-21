@@ -11,14 +11,17 @@ namespace Escaplanet.Scripts.Tests
         private static readonly string OutputPath = $"Temp/{nameof(CompileTest)}";
 
         [Test]
-        public void CheckCompileWebGL() => CheckCompile(BuildTarget.WebGL);
+        public void CheckCompileWebGL()
+        {
+            CheckCompile(BuildTarget.WebGL);
+        }
 
         private static void CheckCompile(BuildTarget target)
         {
             var input = new ScriptCompilationSettings
             {
                 target = target,
-                group = BuildPipeline.GetBuildTargetGroup(target),
+                group = BuildPipeline.GetBuildTargetGroup(target)
             };
 
             var result = PlayerBuildInterface.CompilePlayerScripts(input, OutputPath);
