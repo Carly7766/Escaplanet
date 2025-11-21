@@ -1,19 +1,23 @@
-﻿using Escaplanet.Ingame.Core.GameOver;
+﻿using Escaplanet.Root.Core;
+using Escaplanet.Root.GameLogic;
 
 namespace Escaplanet.Ingame.GameLogic.GameOver
 {
     public class GameOverLogic
     {
-        private readonly IGameOverLogicCore _gameOverLogicCore;
+        SceneTransitionLogic _sceneTransitionLogic;
 
-        public GameOverLogic(IGameOverLogicCore gameOverLogicCore)
+        public GameOverLogic(SceneTransitionLogic sceneTransitionLogic)
         {
-            _gameOverLogicCore = gameOverLogicCore;
+            _sceneTransitionLogic = sceneTransitionLogic;
         }
 
-        public void GameOver()
+        public void GameOver(IGameInfoCore gameInfoCore)
         {
-            _gameOverLogicCore.GameOver();
+            gameInfoCore.CurrentGameResult = GameResult.GameOver;
+            gameInfoCore.CurrentGameOverType = GameOverType.SpaceDrifting;
+
+            _sceneTransitionLogic.Transition(GameState.Result);
         }
     }
 }

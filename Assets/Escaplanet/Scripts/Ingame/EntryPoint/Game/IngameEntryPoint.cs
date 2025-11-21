@@ -6,7 +6,7 @@ namespace Escaplanet.Ingame.EntryPoint.Game
 {
     public class IngameEntryPoint : IInitializable
     {
-        GameStateChangeLogic _gameStateChangeLogic;
+        private readonly GameStateChangeLogic _gameStateChangeLogic;
 
         public IngameEntryPoint(GameStateChangeLogic gameStateChangeLogic)
         {

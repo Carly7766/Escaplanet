@@ -1,6 +1,5 @@
 ﻿using Escaplanet.Ingame.Core.Attract;
 using Escaplanet.Ingame.Core.Player;
-using Escaplanet.Root.Common;
 using Escaplanet.Root.Common.ValueObject;
 using Escaplanet.Root.Core.Common;
 
@@ -8,8 +7,8 @@ namespace Escaplanet.Ingame.GameLogic.Player
 {
     public class PlayerMovementLogic : IPlayerMovementLogic
     {
-        private IGlobalValuePort _globalValuePort;
-        private IFloatMathPort _floatMathPort;
+        private readonly IFloatMathPort _floatMathPort;
+        private readonly IGlobalValuePort _globalValuePort;
 
         public PlayerMovementLogic(IGlobalValuePort globalValuePort, IFloatMathPort floatMathPort)
         {
@@ -38,13 +37,8 @@ namespace Escaplanet.Ingame.GameLogic.Player
 
             var targetSpeed = playerInput.MoveInput * playerMovement.MaxMoveSpeed;
             if (playerInput.MoveInput < 0f && playerAppearance.IsFacingRight)
-            {
                 playerAppearance.Flip(false);
-            }
-            else if (playerInput.MoveInput > 0f && !playerAppearance.IsFacingRight)
-            {
-                playerAppearance.Flip(true);
-            }
+            else if (playerInput.MoveInput > 0f && !playerAppearance.IsFacingRight) playerAppearance.Flip(true);
 
             targetSpeed = _floatMathPort.Lerp(perpendicularSpeed, targetSpeed, playerMovement.MovementLerpFactor);
 

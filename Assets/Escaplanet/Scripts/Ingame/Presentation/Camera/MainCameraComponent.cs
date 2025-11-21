@@ -6,6 +6,27 @@ namespace Escaplanet.Ingame.Presentation.Camera
 {
     public class MainCameraComponent : MonoBehaviour, IMainCameraCore
     {
+        #region MonoBehaviour Functions
+
+        private void Awake()
+        {
+            _camera = GetComponent<UnityEngine.Camera>();
+            _transform = GetComponent<Transform>();
+        }
+
+        #endregion
+
+        #region Interface Functions
+
+        public void ApplyCameraState(CameraState state)
+        {
+            _transform.localPosition = new UnityEngine.Vector3(state.Position.X, state.Position.Y, state.Position.Z);
+            _transform.localRotation = Quaternion.Euler(0, 0, state.Rotation);
+            _camera.orthographicSize = state.OrthographicSize;
+        }
+
+        #endregion
+
         #region MonoBehaviour Fields
 
         private UnityEngine.Camera _camera;
@@ -29,27 +50,6 @@ namespace Escaplanet.Ingame.Presentation.Camera
         public bool IsTransitioning { get; set; }
         public float TransitionDuration => transitionDuration;
         public float TransitionTimer { get; set; }
-
-        #endregion  
-
-        #region MonoBehaviour Functions
-
-        private void Awake()
-        {
-            _camera = GetComponent<UnityEngine.Camera>();
-            _transform = GetComponent<Transform>();
-        }
-
-        #endregion
-
-        #region Interface Functions
-
-        public void ApplyCameraState(CameraState state)
-        {
-            _transform.localPosition = new UnityEngine.Vector3(state.Position.X, state.Position.Y, state.Position.Z);
-            _transform.localRotation = Quaternion.Euler(0, 0, state.Rotation);
-            _camera.orthographicSize = state.OrthographicSize;
-        }
 
         #endregion
     }

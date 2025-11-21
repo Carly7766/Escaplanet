@@ -1,4 +1,5 @@
-﻿using Escaplanet.Root.Common.ValueObject;
+﻿using System;
+using Escaplanet.Root.Common.ValueObject;
 
 namespace Escaplanet.Ingame.Core.Camera
 {
@@ -21,18 +22,24 @@ namespace Escaplanet.Ingame.Core.Camera
             {
                 Position = Vector3.Lerp(a.Position, b.Position, t),
                 Rotation = LerpAngle(a.Rotation, b.Rotation, t),
-                OrthographicSize = LerpFloat(a.OrthographicSize, b.OrthographicSize, t),
+                OrthographicSize = LerpFloat(a.OrthographicSize, b.OrthographicSize, t)
             };
         }
 
-        private static float LerpFloat(float a, float b, float t) => a + (b - a) * t;
+        private static float LerpFloat(float a, float b, float t)
+        {
+            return a + (b - a) * t;
+        }
 
         private static float LerpAngle(float a, float b, float t)
         {
-            var delta = Repeat((b - a) + 180f, 360f) - 180f;
+            var delta = Repeat(b - a + 180f, 360f) - 180f;
             return a + delta * t;
         }
 
-        private static float Repeat(float v, float len) => v - System.MathF.Floor(v / len) * len;
+        private static float Repeat(float v, float len)
+        {
+            return v - MathF.Floor(v / len) * len;
+        }
     }
 }

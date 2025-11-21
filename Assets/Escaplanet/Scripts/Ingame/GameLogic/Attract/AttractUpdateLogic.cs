@@ -1,6 +1,5 @@
 ﻿using System;
 using Escaplanet.Ingame.Core.Attract;
-using Escaplanet.Root.Common;
 using Escaplanet.Root.Common.ValueObject;
 using Escaplanet.Root.Core.Common;
 
@@ -8,7 +7,7 @@ namespace Escaplanet.Ingame.GameLogic.Attract
 {
     public class AttractUpdateLogic : IAttractUpdateLogic
     {
-        private IFloatMathPort _floatMathPort;
+        private readonly IFloatMathPort _floatMathPort;
 
         public AttractUpdateLogic(IFloatMathPort floatMathPort)
         {
@@ -31,7 +30,7 @@ namespace Escaplanet.Ingame.GameLogic.Attract
                 var invR = 1.0f / MathF.Sqrt(r2);
                 var invR3 = MathF.Pow(invR, 3);
 
-                var scale = (mu * attractable.Mass) * invR3;
+                var scale = mu * attractable.Mass * invR3;
                 totalForce += dir * scale;
             }
 

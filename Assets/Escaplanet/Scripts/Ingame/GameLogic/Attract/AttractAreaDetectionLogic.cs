@@ -21,10 +21,7 @@ namespace Escaplanet.Ingame.GameLogic.Attract
         {
             var destroyedSources = attractable.AffectingSources.Where(s => s.IsDestroyed).ToList();
 
-            foreach (var destroyedSource in destroyedSources)
-            {
-                attractable.RemoveAffectingSource(destroyedSource);
-            }
+            foreach (var destroyedSource in destroyedSources) attractable.RemoveAffectingSource(destroyedSource);
         }
     }
 }

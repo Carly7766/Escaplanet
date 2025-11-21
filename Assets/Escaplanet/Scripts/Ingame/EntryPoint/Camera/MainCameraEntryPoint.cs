@@ -3,26 +3,25 @@ using Escaplanet.Ingame.Core.Camera;
 using Escaplanet.Ingame.Core.Player;
 using Escaplanet.Ingame.GameLogic.Camera;
 using R3;
-using UnityEngine;
 using VContainer.Unity;
 
 namespace Escaplanet.Ingame.EntryPoint.Camera
 {
     public class MainCameraEntryPoint : IStartable, IPostStartable, IPostLateTickable, IDisposable
     {
-        private IMainCameraCore _mainCamera;
-        private IMainCameraControlCore _mainCameraControl;
-        private IWorldVirtualCameraCore _worldVirtualCamera;
-        private IPlayerInputCore _playerInputCore;
-        private ICameraBackgroundCore _backgroundCore;
+        private readonly ICameraBackgroundCore _backgroundCore;
 
-        private ICameraUpdateLogic _cameraUpdateLogic;
-        private ICameraSwitchLogic _cameraSwitchLogic;
-        private ICameraControlLogic _cameraControlLogic;
+        private readonly CameraBackgroundFitLogic _cameraBackgroundFitLogic;
+        private readonly ICameraControlLogic _cameraControlLogic;
+        private readonly ICameraSwitchLogic _cameraSwitchLogic;
 
-        private CameraBackgroundFitLogic _cameraBackgroundFitLogic;
+        private readonly ICameraUpdateLogic _cameraUpdateLogic;
 
-        private CompositeDisposable _disposables = new();
+        private readonly CompositeDisposable _disposables = new();
+        private readonly IMainCameraCore _mainCamera;
+        private readonly IMainCameraControlCore _mainCameraControl;
+        private readonly IPlayerInputCore _playerInputCore;
+        private readonly IWorldVirtualCameraCore _worldVirtualCamera;
 
         public MainCameraEntryPoint(IMainCameraCore mainCamera, IMainCameraControlCore mainCameraControl,
             IWorldVirtualCameraCore worldVirtualCamera, IPlayerInputCore playerInputCore,
@@ -41,19 +40,9 @@ namespace Escaplanet.Ingame.EntryPoint.Camera
             _cameraBackgroundFitLogic = cameraBackgroundFitLogic;
         }
 
-        public void Start()
+        public void Dispose()
         {
-            _mainCameraControl.WorldCamera = _worldVirtualCamera;
-            _playerInputCore.OnSwitchCameraInput.Subscribe(inputState =>
-                {
-                    _cameraControlLogic.SwitchCamera(inputState, _mainCamera, _cameraSwitchLogic, _mainCameraControl);
-                }
-            ).AddTo(_disposables);
-        }
-
-        public void PostStart()
-        {
-            _cameraSwitchLogic.SwitchCamera(_mainCamera, _mainCameraControl.PlayerCamera);
+            _disposables.Dispose();
         }
 
         public void PostLateTick()
@@ -62,9 +51,19 @@ namespace Escaplanet.Ingame.EntryPoint.Camera
             _cameraBackgroundFitLogic.UpdateFitCamera(_mainCamera, _backgroundCore);
         }
 
-        public void Dispose()
+        public void PostStart()
         {
-            _disposables.Dispose();
+            _cameraSwitchLogic.SwitchCamera(_mainCamera, _mainCameraControl.PlayerCamera);
+        }
+
+        public void Start()
+        {
+            _mainCameraControl.WorldCamera = _worldVirtualCamera;
+            _playerInputCore.OnSwitchCameraInput.Subscribe(inputState =>
+                {
+                    _cameraControlLogic.SwitchCamera(inputState, _mainCamera, _cameraSwitchLogic, _mainCameraControl);
+                }
+            ).AddTo(_disposables);
         }
     }
 }

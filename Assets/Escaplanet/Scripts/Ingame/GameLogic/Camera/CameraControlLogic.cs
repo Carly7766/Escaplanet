@@ -1,5 +1,5 @@
 ﻿using Escaplanet.Ingame.Core.Camera;
-using Escaplanet.Root.Common.ValueObject;
+using Escaplanet.Root.Core.Common.ValueObject;
 
 namespace Escaplanet.Ingame.GameLogic.Camera
 {
@@ -12,13 +12,9 @@ namespace Escaplanet.Ingame.GameLogic.Camera
             if (inputState == InputState.Down)
             {
                 if (mainCamera.ActiveCamera == mainCameraControl.WorldCamera)
-                {
                     cameraSwitchLogic.SwitchCamera(mainCamera, mainCameraControl.PlayerCamera);
-                }
                 else
-                {
                     cameraSwitchLogic.SwitchCamera(mainCamera, mainCameraControl.WorldCamera);
-                }
             }
         }
     }

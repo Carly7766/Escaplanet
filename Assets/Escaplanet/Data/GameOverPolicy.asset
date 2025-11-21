@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b52df4adbfc46cebe2a1e2f14165147, type: 3}
   m_Name: GameOverPolicy
   m_EditorClassIdentifier: 
-  graceSeconds: 2
+  graceSeconds: 1
   countdownSeconds: 5

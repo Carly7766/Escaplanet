@@ -10,30 +10,10 @@ namespace Escaplanet.Ingame.Presentation.Attract
 {
     public class AttractableComponent : MonoBehaviour, IAttractableCore
     {
+        private readonly HashSet<IReadonlyAttractSourceCore> _affectingSources = new();
+        private Collider2D _collider2D;
         private Transform _transform;
         protected Rigidbody2D Rigidbody2D;
-        private Collider2D _collider2D;
-
-        private readonly HashSet<IReadonlyAttractSourceCore> _affectingSources = new();
-
-
-        public Vector2 Position => new(_transform.position.x, _transform.position.y);
-        public float Mass => Rigidbody2D.mass;
-
-        public IReadOnlyCollection<IReadonlyAttractSourceCore> AffectingSources => _affectingSources;
-
-        public IReadonlyAttractSourceCore NearestSource
-        {
-            get
-            {
-                return _affectingSources
-                    .OrderBy(s => (Position - s.Position).SquareMagnitude())
-                    .FirstOrDefault();
-            }
-        }
-
-        public Observable<IAttractSourceCore> OnEnterAttractArea { get; private set; }
-        public Observable<IAttractSourceCore> OnExitAttractArea { get; private set; }
 
 
         private void Awake()
@@ -54,6 +34,25 @@ namespace Escaplanet.Ingame.Presentation.Attract
                 .Where(a => a != null)
                 .TakeUntil(destroyCancellationToken);
         }
+
+
+        public Vector2 Position => new(_transform.position.x, _transform.position.y);
+        public float Mass => Rigidbody2D.mass;
+
+        public IReadOnlyCollection<IReadonlyAttractSourceCore> AffectingSources => _affectingSources;
+
+        public IReadonlyAttractSourceCore NearestSource
+        {
+            get
+            {
+                return _affectingSources
+                    .OrderBy(s => (Position - s.Position).SquareMagnitude())
+                    .FirstOrDefault();
+            }
+        }
+
+        public Observable<IAttractSourceCore> OnEnterAttractArea { get; private set; }
+        public Observable<IAttractSourceCore> OnExitAttractArea { get; private set; }
 
 
         public void Attract(Vector2 force)

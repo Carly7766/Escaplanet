@@ -5,6 +5,6 @@
         None = 0,
         Title = 1,
         Ingame = 2,
-        GameOver = 3,
+        Result = 3
     }
 }

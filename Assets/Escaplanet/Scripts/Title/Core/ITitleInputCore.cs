@@ -1,0 +1,10 @@
+﻿using Escaplanet.Root.Core.Common.ValueObject;
+using R3;
+
+namespace Escaplanet.Title.Core
+{
+    public interface ITitleInputCore
+    {
+        Observable<InputState> OnInputTransition { get; }
+    }
+}
