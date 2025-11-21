@@ -31,9 +31,6 @@ namespace Escaplanet.Ingame.Presentation.UI
         {
             while (!token.IsCancellationRequested)
             {
-                seconds--;
-                if (seconds <= 0) break;
-
                 _text.text = seconds.ToString();
                 await LSequence.Create()
                     .Join(LMotion.Create(360f, 240f, 1)
@@ -44,6 +41,9 @@ namespace Escaplanet.Ingame.Presentation.UI
                         .Bind(a => _text.alpha = a))
                     .Run()
                     .ToUniTask(token);
+
+                seconds--;
+                if (seconds <= 0) break;
             }
         }
     }

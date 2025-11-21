@@ -2,6 +2,7 @@
 using Escaplanet.Ingame.GameLogic.Attract;
 using Escaplanet.Ingame.GameLogic.Camera;
 using Escaplanet.Ingame.GameLogic.Camera.PlayerCamera;
+using Escaplanet.Ingame.GameLogic.GameClear;
 using Escaplanet.Ingame.GameLogic.GameOver;
 using Escaplanet.Ingame.GameLogic.Player;
 using Escaplanet.Ingame.Presentation.Camera;
@@ -15,7 +16,6 @@ namespace Escaplanet.Ingame.Composition.LifetimeScope
     public class IngameLifetimeScope : VContainer.Unity.LifetimeScope
     {
         [SerializeField] private GameOverPolicyScriptableObject gameOverPolicyScriptableObject;
-        [SerializeField] private GameOverLogicComponent gameOverLogicComponent;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -45,9 +45,11 @@ namespace Escaplanet.Ingame.Composition.LifetimeScope
 
             // GameOver Logic
             builder.RegisterInstance(gameOverPolicyScriptableObject).AsImplementedInterfaces();
-            builder.RegisterComponent(gameOverLogicComponent).AsImplementedInterfaces();
             builder.Register<GameOverLogic>(Lifetime.Singleton).AsSelf();
             builder.Register<GameOverMiaDetectionLogic>(Lifetime.Singleton).AsSelf();
+
+            // GameClear Logic
+            builder.Register<GameClearLogic>(Lifetime.Singleton).AsSelf();
 
             // EntryPoint
             builder.RegisterEntryPoint<IngameEntryPoint>();

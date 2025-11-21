@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using Escaplanet.Ingame.Core.Attract;
 using Escaplanet.Ingame.Core.GameOver;
 using Escaplanet.Ingame.Core.UI;
+using Escaplanet.Root.Core;
 using Escaplanet.Root.Core.Common;
 
 namespace Escaplanet.Ingame.GameLogic.GameOver
@@ -32,7 +33,7 @@ namespace Escaplanet.Ingame.GameLogic.GameOver
         }
 
         public void Update(IAttractableCore attractable, IGameOverDetectableCore gameOverDetectable,
-            ICountdownTextCore countdownText, CancellationToken token = default)
+            ICountdownTextCore countdownText, IGameInfoCore gameInfoCore, CancellationToken token = default)
         {
             switch (gameOverDetectable.CurrentState)
             {
@@ -59,7 +60,7 @@ namespace Escaplanet.Ingame.GameLogic.GameOver
                             gameOverDetectable.CountdownCancellationTokenSource.Token);
 
                         countdownText.Show();
-                        BeginCountdownFlowAsync(countdownText, linkedCts.Token).Forget();
+                        BeginCountdownFlowAsync(countdownText, gameInfoCore, linkedCts.Token).Forget();
                         gameOverDetectable.SetState(GameOverState.Countdown);
                     }
 
@@ -78,11 +79,11 @@ namespace Escaplanet.Ingame.GameLogic.GameOver
             }
         }
 
-        private async UniTaskVoid BeginCountdownFlowAsync(ICountdownTextCore countdownText,
+        private async UniTaskVoid BeginCountdownFlowAsync(ICountdownTextCore countdownText, IGameInfoCore gameInfo,
             CancellationToken token = default)
         {
             await countdownText.RunCountdownAsync(_gameOverPolicy.CountdownSeconds, token);
-            _gameOverLogic.GameOver();
+            _gameOverLogic.GameOver(gameInfo);
         }
     }
 }
