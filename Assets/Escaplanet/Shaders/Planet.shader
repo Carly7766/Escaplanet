@@ -2,7 +2,7 @@ Shader "Escaplanet/Lit/Planet"
 {
     Properties
     {
-        _MainTex("Diffuse", 2D) = "white" {}
+        [PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
 
         _Center("Center", Vector) = (0.5, 0.5, 0, 0)
         _Radius("Radius", Float) = 0.5
@@ -46,30 +46,26 @@ Shader "Escaplanet/Lit/Planet"
         Pass
         {
             HLSLPROGRAM
-            #pragma vertex   vert
+            #pragma vertex vert
             #pragma fragment frag
 
             struct Attributes
             {
                 float3 positionOS : POSITION;
-                float4 color : COLOR;
                 float2 uv : TEXCOORD0;
+                float4 color : COLOR;
                 UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             struct Varyings
             {
                 float4 positionCS : SV_POSITION;
-                half4 color : COLOR;
                 float2 uv : TEXCOORD0;
+                half4 color : COLOR;
                 UNITY_VERTEX_OUTPUT_STEREO
             };
 
-            TEXTURE2D(_MainTex);
-            SAMPLER(sampler_MainTex);
-
             CBUFFER_START(UnityPerMaterial)
-                float4 _MainTex_ST;
                 float2 _Center;
                 float _Radius;
                 float _Strength;
@@ -92,6 +88,9 @@ Shader "Escaplanet/Lit/Planet"
                 float _Rotation;
             CBUFFER_END
 
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
+
             Varyings vert(Attributes attributes)
             {
                 Varyings o = (Varyings)0;
@@ -99,7 +98,6 @@ Shader "Escaplanet/Lit/Planet"
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
                 o.positionCS = TransformObjectToHClip(attributes.positionOS);
-                // o.uv = TRANSFORM_TEX(attributes.uv, _MainTex);
                 o.uv = attributes.uv;
                 o.color = attributes.color;
                 return o;
@@ -153,10 +151,6 @@ Shader "Escaplanet/Lit/Planet"
                     amplitude *= gain;
                 }
                 return value;
-            }
-
-            half4 a()
-            {
             }
 
             half4 frag(Varyings i) : SV_Target

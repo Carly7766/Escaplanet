@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Planet2
+  m_Name: Planet4
   m_Shader: {fileID: 4800000, guid: fbc38c8b409437a409cd86bcf484d2a5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -21,7 +21,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _Rotation
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -36,16 +36,16 @@ Material:
     - _BandSoftness: 0.01
     - _EdgeFeather: 0
     - _EdgeSoftness: 0.001
-    - _Frequency: 2
+    - _Frequency: 2.39
     - _Gain: 0.08
     - _Lacunarity: 1.7
     - _Octaves: 8
     - _Radius: 0.5
-    - _Rotation: -27
-    - _Seed: 145.51
+    - _Rotation: -135
+    - _Seed: 356.98
     - _Strength: 1
     m_Colors:
     - _Center: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - _ColorA: {r: 0.745283, g: 0.32013762, b: 0.2285066, a: 1}
-    - _ColorB: {r: 0.1775543, g: 0.3584906, b: 0.35491022, a: 1}
+    - _ColorA: {r: 0.36862746, g: 0.5568628, b: 0.42060226, a: 1}
+    - _ColorB: {r: 0.8933081, g: 0.8962264, b: 0.8243592, a: 1}
   m_BuildTextureStacks: []

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Planet2
+  m_Name: Planet3
   m_Shader: {fileID: 4800000, guid: fbc38c8b409437a409cd86bcf484d2a5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -42,10 +42,10 @@ Material:
     - _Octaves: 8
     - _Radius: 0.5
     - _Rotation: -27
-    - _Seed: 145.51
+    - _Seed: 299.26
     - _Strength: 1
     m_Colors:
     - _Center: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - _ColorA: {r: 0.745283, g: 0.32013762, b: 0.2285066, a: 1}
-    - _ColorB: {r: 0.1775543, g: 0.3584906, b: 0.35491022, a: 1}
+    - _ColorA: {r: 0.7074848, g: 0.5663492, b: 0.8396226, a: 1}
+    - _ColorB: {r: 0.5071645, g: 0.5166707, b: 0.8207547, a: 1}
   m_BuildTextureStacks: []

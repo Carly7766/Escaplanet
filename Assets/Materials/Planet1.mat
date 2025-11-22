@@ -42,7 +42,7 @@ Material:
     - _Octaves: 8
     - _Radius: 0.5
     - _Rotation: 9
-    - _Seed: 8.91
+    - _Seed: 31.5
     - _Strength: 1
     m_Colors:
     - _Center: {r: 0.5, g: 0.5, b: 0, a: 0}
